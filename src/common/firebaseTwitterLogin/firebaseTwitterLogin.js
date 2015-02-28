@@ -7,9 +7,6 @@ angular.module("Wisen.firebaseTwitterLogin", [
 
   var serviceInstance = {
     uid: null,
-    OAuthSuccess: function () {
-      return this.uid === null;
-    },
     login: function (cb) {
       ref.authWithOAuthPopup("twitter", function (error, OAuth) {
         if (error) {

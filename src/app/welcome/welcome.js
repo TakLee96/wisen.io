@@ -1,5 +1,6 @@
 angular.module( 'Wisen.welcome', [
-  'ui.router'
+  'ui.router',
+  'Wisen.firebaseTwitterLogin'
 ])
 
 /**
@@ -19,8 +20,21 @@ angular.module( 'Wisen.welcome', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'WelcomeCtrl', function ($scope) {
-  $scope.OAuth = {};
+.controller( 'WelcomeCtrl', function ($scope, $login, $state) {
+
+  if ($login.getUid()) {
+    $state.go("settings");
+  }
+
+  $scope.twitterLogin = $login.login(function (error, uid) {
+    if (error) {
+      console.log("Login Failed!", error);
+    } else {
+      console.log("Login Successful:", uid);
+      $state.go("settings");
+    }
+  });
+
 })
 
 ;
