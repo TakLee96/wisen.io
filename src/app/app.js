@@ -5,17 +5,21 @@ angular.module( 'Wisen', [
   'Wisen.settings',
   'Wisen.explore',
   'Wisen.connect',
-  'ui.router'
+  'ui.router',
+  'Wisen.firebaseTwitterLogin'
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
   $urlRouterProvider.otherwise( '/welcome' );
 })
 
-.controller( 'AppCtrl', function ($scope, $location) {
+.controller( 'AppCtrl', function ($scope, $location, $login, $state) {
 
   $scope.$on('$stateChangeSuccess', function(event, toState){
       $scope.pageTitle = toState.data.pageTitle + ' | Wisen';
+      if (toState.name !== "welcome" && $login.getUid() === null) {
+        $state.go("welcome");
+      }
   });
 
 })
