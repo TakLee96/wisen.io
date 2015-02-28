@@ -21,9 +21,16 @@ angular.module( 'Wisen.connect', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'ConnectCtrl', ["$scope", "$sinch", "$login", function ($scope, $sinch, $login) {
+.controller( 'ConnectCtrl', function ($scope, $sinch, $login) {
 
   $scope.messages = [];
+  $scope.prevView = {
+    senderId: $login.getSinchUsername(),
+    recipientId: "",
+    textBody: ""
+  };
+
+  console.log($scope.messages);
 
   $sinch.startClient(function () {
     global_username = $login.getSinchUsername();
@@ -32,29 +39,29 @@ angular.module( 'Wisen.connect', [
   });
 
   $scope.send = function () {
-    $sinch.sendMessage($scope.recipient, $scope.text, function (error) {
+    $sinch.sendMessage($scope.prevView.recipientId, $scope.prevView.textBody, function (error) {
       console.log(error);
     });
   };
 
-  $sinch.onMessageDelivered = function (deliveryInfo) {
+  $sinch.onMessageDelivered(function (deliveryInfo) {
     var message = {
       senderId: deliveryInfo.senderId,
       recipientId: deliveryInfo.recipientId,
-      content: $scope.text
+      textBody: $scope.prevView.textBody
     };
-    messages.push(message);
-    $scope.text = "";
-  };
+    $scope.messages.push(message);
+    $scope.prevView.textBody = "";
+  });
 
-  $sinch.onIncomingMessage = function (message) {
+  $sinch.onIncomingMessage(function (recievedInfo) {
     var message = {
-      senderId: message.senderId,
+      senderId: recievedInfo.senderId,
       recipientId: $login.getSinchUsername(),
-      content: message.textBody
+      textBody: recievedInfo.textBody
     };
-    messages.push(message);
-  }
+    $scope.messages.push(message);
+  });
 
 })
 

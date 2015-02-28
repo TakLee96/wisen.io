@@ -2,7 +2,34 @@ angular.module("Wisen.firebaseTwitterLogin", [
   "firebase"
 ])
 
-.factory("$login", function () {
+.factory("$local", function () {
+  return {
+    userIsCached: function () {
+      return (typeof(Storage) !== "undefined" && localStorage.getItem("uid") !== null);
+    },
+    localStorageIsAvailable: function () {
+      return typeof(Storage) !== "undefined";
+    },
+    getUid: function () {
+      return localStorage.getItem("uid");
+    },
+    getName: function () {
+      return localStorage.getItem("name");
+    },
+    setUid: function (uid) {
+      localStorage.setItem("uid", uid);
+    },
+    setName: function (name) {
+      localStorage.setItem("name", name);
+    },
+    clear: function () {
+      localStorage.removeItem("uid");
+      localStorage.removeItem("name");
+    }
+  };
+})
+
+.factory("$login", function ($local) {
   var ref = new Firebase("https://wisen.firebaseio.com/");
 
   var serviceInstance = {
@@ -10,15 +37,23 @@ angular.module("Wisen.firebaseTwitterLogin", [
     name: null,
     ref: ref,
     login: function (cb) {
-      ref.authWithOAuthPopup("twitter", function (error, OAuth) {
-        if (error) {
-          cb(error, null, null);
-        } else {
-          this.uid = OAuth.uid;
-          this.name = OAuth.twitter.displayName;
-          cb(null, OAuth.uid, OAuth.twitter.displayName);
-        }
-      }.bind(this));
+      if ($local.userIsCached()) {
+        cb(null, $local.getUid(), $local.getName());
+      } else {
+        ref.authWithOAuthPopup("twitter", function (error, OAuth) {
+          if (error) {
+            cb(error, null, null);
+          } else {
+            this.uid = OAuth.uid;
+            this.name = OAuth.twitter.displayName;
+            if ($local.localStorageIsAvailable()) {
+              $local.setUid(this.uid);
+              $local.setName(this.name);
+            }
+            cb(null, OAuth.uid, OAuth.twitter.displayName);
+          }
+        }.bind(this));
+      }
     },
     getUid: function () {
       return this.uid;
@@ -28,8 +63,19 @@ angular.module("Wisen.firebaseTwitterLogin", [
     },
     getRef: function () {
       return this.ref;
+    },
+    getSinchUsername: function () {
+      return this.getUid().slice(8);
+    },
+    clear: function () {
+      $local.clear();
     }
   };
+
+  if ($local.userIsCached()) {
+    serviceInstance.uid = $local.getUid();
+    serviceInstance.name = $local.getName();
+  }
 
   return serviceInstance;
 })

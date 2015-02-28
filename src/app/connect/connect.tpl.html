@@ -1,14 +1,20 @@
 <div>This is Connect</div>
 
 <label>Recipient:</label>
-<input type="text" ng-model="recipient" />
+<input type="text" ng-model="prevView.recipientId" />
 <label>Text:</label>
-<input type="text" ng-model="text" />
+<input type="text" ng-model="prevView.textBody" />
 
 <input type="button" ng-click="send()" value="send">
 
+<p>
+  <div>Preview:</div>
+  <div>senderId: {{prevView.senderId}}</div>
+  <div>recipientId: {{prevView.recipientId}}</div>
+  <div>textBody: {{prevView.textBody}}</div>
+</p>
 <p ng-repeat="message in messages">
   <div>sender: {{message.senderId}}</div>
   <div>recipient: {{message.recipientId}}</div>
-  <div>content: {{message.content}}</div>
+  <div>textBody: {{message.textBody}}</div>
 </p>
