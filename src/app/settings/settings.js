@@ -54,7 +54,7 @@ angular.module( 'Wisen.settings', [
         $scope.locationAlert.type = "success";
         $scope.locationAlert.msg = "location stored";
         $scope.$digest();
-      }).error(function (error) {
+      }, function (error) {
         $scope.locationAlert.type = "danger";
         $scope.locationAlert.msg = error;
         $scope.$digest();

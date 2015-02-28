@@ -70,7 +70,8 @@ module.exports = {
       'bower_components/angularfire/dist/angularfire.min.js',
       'bower_components/rsvp/rsvp.min.js',
       'bower_components/geofire/dist/geofire.min.js',
-      'bower_components/angularGeoFire/dist/angularGeoFire.min.js'
+      'bower_components/angularGeoFire/dist/angularGeoFire.min.js',
+      'bower_components/sinch-rtc/sinch.min.js'
     ],
     css: [
     ],

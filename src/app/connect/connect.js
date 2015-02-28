@@ -1,5 +1,7 @@
 angular.module( 'Wisen.connect', [
-  'ui.router'
+  'ui.router',
+  'Wisen.sinchClient',
+  'Wisen.firebaseTwitterLogin'
 ])
 
 /**
@@ -19,7 +21,32 @@ angular.module( 'Wisen.connect', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'ConnectCtrl', function ($scope) {
+.controller( 'ConnectCtrl', function ($scope, $sinch, $login) {
+
+  $scope.messages = [];
+
+  $sinch.startClient(function () {
+    global_username = $login.getUid().slice(8);
+  }, function (error) {
+    console.log(error);
+  });
+
+  $scope.send = function () {
+    $sinch.sendMessage($scope.recipient, $scope.text, function (error) {
+      console.log(error);
+    });
+  };
+
+  $sinch.onMessageDelivered = function (deliveryInfo) {
+    var message = {
+      senderId: deliveryInfo.senderId,
+      recipientId: deliveryInfo.recipientId,
+      content: $scope.text
+    };
+    messages.push(message);
+    $scope.text = "";
+  };
+
 })
 
 ;

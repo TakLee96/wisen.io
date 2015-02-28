@@ -12,6 +12,7 @@
     "firebase": "~2.2.1",
     "angularfire": "~0.9.2",
     "geofire": "~3.2.1",
-    "angularGeoFire": "~3.0.0"
+    "angularGeoFire": "~3.0.0",
+    "sinch-rtc": "~1.2.0"
   }
 }
