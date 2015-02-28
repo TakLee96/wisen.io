@@ -3,7 +3,7 @@ angular.module("Wisen.firebaseTwitterLogin", [
 ])
 
 .factory("$login", function () {
-  var ref = new Firebase("https://wisen.firebaseio.com/")
+  var ref = new Firebase("https://wisen.firebaseio.com/");
 
   var serviceInstance = {
     uid: null,

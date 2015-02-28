@@ -1,6 +1,6 @@
 angular.module( 'Wisen.settings', [
   'ui.router',
-  'firebaseTwitterLogin'
+  'Wisen.firebaseTwitterLogin'
 ])
 
 /**
@@ -22,7 +22,8 @@ angular.module( 'Wisen.settings', [
  */
 .controller( 'SettingsCtrl', function ($scope, $login) {
   
-  var userObj = $login.getRef().child("users").child(getUid());
+  var userObj = $login.getRef().child("users").child($login.getUid());
+  userObj.update({name: $login.getName()});
 
   $scope.name = $login.getName();
 
@@ -30,7 +31,7 @@ angular.module( 'Wisen.settings', [
     $scope.user = user;
   });
 
-  $scope.newTags = {"": true};
+  $scope.newTags = [""];
 
   $scope.toRemove = {};
 
@@ -40,14 +41,16 @@ angular.module( 'Wisen.settings', [
   };
 
   $scope.addField = function () {
-    $scope.newTags[""] = true;
+    $scope.newTags.push("");
   };
 
   $scope.save = function () {
-    for (tag in $scope.toRemove) {
-      userObj.child(tag).remove();
+    for (var rtag in $scope.toRemove) {
+      userObj.child(rtag).remove();
     }
-    for (tag in $scope.newTags) {
+    var tag;
+    for (var i = 0; i < $scope.newTags.length; i++) {
+      tag = $scope.newTags[i];
       if (tag !== "") {
         var obj = {};
         obj[tag] = true;

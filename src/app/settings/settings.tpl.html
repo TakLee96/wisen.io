@@ -2,15 +2,18 @@
 
 <form>
   <label>Name:</label>
-  <input type="text" readonly ng-bind="name" />
+  <p ng-bind="name"></p>
   <label>Tags:</label>
   <div ng-repeat="(tag, val) in user.tags">
     <input type="text" value="{{tag}}" />
     <input type="button" ng-click="remove(tag)" value="X" />
   </div>
   <div ng-repeat="tag in newTags">
-    <input type="text" value="{{tag}}" placeholder="Tag Name" />
+    <input type="text" value="{{tag}}" placeholder="Tag Name" ng-model="newTags[$index]" />
   </div>
   <input type="button" ng-click="addField()" value="+" />
   <input type="button" ng-click="save()" value="save" />
 </form>
+
+<div>ToRemove: {{toRemove}}</div>
+<div>NewTags: {{newTags}}</div>
