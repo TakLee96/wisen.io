@@ -29,8 +29,7 @@ angular.module( 'Wisen.settings', [
   }
   
   var userObj = $login.getRef().child("users").child($login.getUid());
-  var $geo = $geofire(userObj);
-  $scope.shit = $geo;
+  var $geo = $geofire($login.getRef().child("userLocations"));
 
   $scope.locationAlert = {
     type: "warning",
@@ -48,7 +47,7 @@ angular.module( 'Wisen.settings', [
       $scope.locationAlert.type = "info";
       $scope.locationAlert.msg = "location found";
       $scope.$digest();
-      $geo.$set("location", [
+      $geo.$set($login.getUid(), [
         position.coords.latitude, 
         position.coords.longitude
       ]).then(function () {
