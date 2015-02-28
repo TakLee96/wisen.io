@@ -8,5 +8,8 @@
     "angular-bootstrap": "~0.10.0",
     "angular-ui-router": "~0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "firebase": "~2.2.1",
+    "angularfire": "~0.9.2"
+  }
 }

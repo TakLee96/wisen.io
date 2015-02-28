@@ -2,3 +2,4 @@ vendor
 build
 bin
 node_modules
+bower_components

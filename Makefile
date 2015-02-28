@@ -1,0 +1,3 @@
+all:
+	grunt
+	npm start
