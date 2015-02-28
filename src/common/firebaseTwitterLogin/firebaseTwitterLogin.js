@@ -18,7 +18,7 @@ angular.module("Wisen.firebaseTwitterLogin", [
           this.name = OAuth.twitter.displayName;
           cb(null, OAuth.uid, OAuth.twitter.displayName);
         }
-      }.bind(this), { remember: "sessionOnly" });
+      }.bind(this));
     },
     getUid: function () {
       return this.uid;

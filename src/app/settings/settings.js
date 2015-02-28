@@ -1,6 +1,7 @@
 angular.module( 'Wisen.settings', [
   'ui.router',
-  'Wisen.firebaseTwitterLogin'
+  'Wisen.firebaseTwitterLogin',
+  'ui.bootstrap'
 ])
 
 /**
@@ -20,10 +21,45 @@ angular.module( 'Wisen.settings', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'SettingsCtrl', function ($scope, $login) {
+.controller( 'SettingsCtrl', function ($scope, $login, $state) {
+
+  if ($login.getUid() === null) {
+    $state.go("welcome");
+  }
   
   var userObj = $login.getRef().child("users").child($login.getUid());
-  userObj.update({name: $login.getName()});
+  var geoFire = new GeoFire(userObj);
+
+  $scope.locationAlert = {
+    type: "warning",
+    msg: "retrieving location..."
+  };
+
+  var id = setTimeout(function () {
+    $scope.locationAlert.type = "danger";
+    $scope.locationAlert.msg = "retrieving is slow...";
+  }, 5000);
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      clearTimeout(id);
+      $scope.locationAlert.type = "info";
+      $scope.locationAlert.msg = "location found";
+      $scope.$digest();
+      geoFire.set("location", [
+        position.coords.latitude, 
+        position.coords.longitude
+      ]).then(function () {
+        $scope.locationAlert.type = "success";
+        $scope.locationAlert.msg = "location stored";
+        $scope.$digest();
+      }).error(function (error) {
+        $scope.locationAlert.type = "danger";
+        $scope.locationAlert.msg = error;
+        $scope.$digest();
+      });
+    });
+  }
 
   $scope.name = $login.getName();
 
@@ -33,7 +69,6 @@ angular.module( 'Wisen.settings', [
   });
 
   $scope.newTags = [""];
-
   $scope.toRemove = {};
 
   $scope.remove = function (key) {
