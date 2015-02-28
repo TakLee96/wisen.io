@@ -2,7 +2,6 @@ angular.module( 'Wisen', [
   'templates-app',
   'templates-common',
   'Wisen.welcome',
-  'Wisen.register',
   'Wisen.settings',
   'Wisen.explore',
   'Wisen.connect',

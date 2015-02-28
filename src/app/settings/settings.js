@@ -1,5 +1,6 @@
 angular.module( 'Wisen.settings', [
-  'ui.router'
+  'ui.router',
+  'firebase'
 ])
 
 /**
@@ -19,7 +20,10 @@ angular.module( 'Wisen.settings', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'SettingsCtrl', function ($scope) {
+.controller( 'SettingsCtrl', function ($scope, $firebase) {
+
+  var ref = new Firebase("https://wisen.firebaseio.com/");
+
 })
 
 ;

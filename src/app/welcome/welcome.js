@@ -26,14 +26,16 @@ angular.module( 'Wisen.welcome', [
     $state.go("settings");
   }
 
-  $scope.twitterLogin = $login.login(function (error, uid) {
-    if (error) {
-      console.log("Login Failed!", error);
-    } else {
-      console.log("Login Successful:", uid);
-      $state.go("settings");
-    }
-  });
+  $scope.twitterLogin = function () {
+    $login.login(function (error, uid) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+        console.log("Login Successful:", uid);
+        $state.go("settings");
+      }
+    });
+  };
 
 })
 
