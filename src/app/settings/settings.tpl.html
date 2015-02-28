@@ -8,12 +8,9 @@
     <input type="text" value="{{tag}}" />
     <input type="button" ng-click="remove(tag)" value="X" />
   </div>
-  <div ng-repeat="tag in newTags">
+  <div ng-repeat="tag in newTags track by $index">
     <input type="text" value="{{tag}}" placeholder="Tag Name" ng-model="newTags[$index]" />
   </div>
   <input type="button" ng-click="addField()" value="+" />
   <input type="button" ng-click="save()" value="save" />
 </form>
-
-<div>ToRemove: {{toRemove}}</div>
-<div>NewTags: {{newTags}}</div>

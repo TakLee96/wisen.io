@@ -28,7 +28,8 @@ angular.module( 'Wisen.settings', [
   $scope.name = $login.getName();
 
   userObj.on("value", function (user) {
-    $scope.user = user;
+    $scope.user = user.val();
+    $scope.$digest();
   });
 
   $scope.newTags = [""];
@@ -37,7 +38,7 @@ angular.module( 'Wisen.settings', [
 
   $scope.remove = function (key) {
     $scope.toRemove[key] = true;
-    delete $scope.user[key];
+    delete $scope.user.tags[key];
   };
 
   $scope.addField = function () {
@@ -46,7 +47,7 @@ angular.module( 'Wisen.settings', [
 
   $scope.save = function () {
     for (var rtag in $scope.toRemove) {
-      userObj.child(rtag).remove();
+      userObj.child("tags").child(rtag).remove();
     }
     var tag;
     for (var i = 0; i < $scope.newTags.length; i++) {
@@ -54,9 +55,11 @@ angular.module( 'Wisen.settings', [
       if (tag !== "") {
         var obj = {};
         obj[tag] = true;
-        userObj.child("tags").set(obj);
+        userObj.child("tags").update(obj);
       }
     }
+    $scope.newTags = [""];
+    $scope.toRemove = {};
   };
 
 })
