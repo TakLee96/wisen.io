@@ -1,5 +1,5 @@
 <!--NavBar Custom Directive-->
-
+<!--
 <form>
   <label>Name:</label>
   <p ng-bind="name"></p>
@@ -13,6 +13,39 @@
   </div>
   <input type="button" ng-click="addField()" value="+" />
   <input type="button" ng-click="save()" value="save" />
-</form>
+</form> -->
 
-<alert type="locationAlert.type">{{locationAlert.msg}}</alert>
+<div id="primaryContainer" class="primaryContainer clearfix">
+    <div id="settings" class="clearfix">
+                <div id="setting" class="clearfix">
+                    <p id="text1"> Tag your skills&#x3a; </p>
+                    <p id="text2">
+                    Add some things that you are good at&#x21; People nearby you will see your strengths, too.&nbsp;eg. cooking, skateboarding, etc.
+                    </p>
+                    <form>
+                        <div class="clearfix">
+                            <input type="text" value="{{tag}}" popover="eg. cooking, biking, origami..."  popover-trigger="mouseenter" class="form-control" ng-repeat="tag in newTags track by $index" ng-model="newTags[$index]" id="input" placeholder="Please enter your skill here...">
+                            <!-- <input  type="text" class="" value="{{tag}}" ng-repeat="tag in newTags track by $index" ng-model="newTags[$index]"/> -->
+                            <button type="button" ng-click="addField()" id="add" class="btn btn-info clearfix" ng-model="singleModel"> <span id="text4"> Add </span> </button>
+                            <button type="button" ng-click="save()" id="save" class="btn btn-primary clearfix" ng-model="singleModel"
+                                btn-checkbox> <span id="text5">Save</span> </button>
+
+                        </div>
+                    </form>
+                </div>
+            <div id="skills" class="clearfix">
+                    <div id="skill" class="clearfix">
+                        <div id="input1" class="clearfix animated" ng-repeat="(tag, val) in user.tags">
+                          <span type="text" id="text17"> </br>{{tag}} </span>
+                          <div id="delete" class="clearfix" ng-click="remove(tag)"/> <span id="deleteX"}>  X</span> </div>
+                        </div>
+                   </div>
+            </div>
+        </div>
+
+    <!-- <alert type="locationAlert.type">{{locationAlert.msg}}</alert> -->
+    </div>
+
+    <alert type="locationAlert.type">{{locationAlert.msg}}</alert>
+
+</div>
