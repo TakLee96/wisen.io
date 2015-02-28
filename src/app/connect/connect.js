@@ -45,22 +45,23 @@ angular.module( 'Wisen.connect', [
   };
 
   $sinch.onMessageDelivered(function (deliveryInfo) {
-    var message = {
-      senderId: deliveryInfo.senderId,
-      recipientId: deliveryInfo.recipientId,
-      textBody: $scope.prevView.textBody
-    };
-    $scope.messages.push(message);
-    $scope.prevView.textBody = "";
+    console.log("onMessageDelivered triggered");
+    console.log(deliveryInfo);
   });
 
-  $sinch.onIncomingMessage(function (recievedInfo) {
+  $sinch.onIncomingMessage(function (receivedInfo) {    
     var message = {
-      senderId: recievedInfo.senderId,
-      recipientId: $login.getSinchUsername(),
-      textBody: recievedInfo.textBody
+      senderId: receivedInfo.senderId,
+      recipientId: receivedInfo.recipientIds[1],
+      textBody: receivedInfo.textBody,
+      timestamp: receivedInfo.timestamp
     };
+    console.log(receivedInfo);
     $scope.messages.push(message);
+    if (receivedInfo.direction) {
+      $scope.prevView.textBody = "";
+    }
+    $scope.$digest();
   });
 
 })

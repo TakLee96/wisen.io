@@ -13,11 +13,16 @@ angular.module("Wisen.sinchClient", [
   };
 })
 //b063ab0f-bfbc-4a6a-b191-401d579cb8cf
-.factory("$sinch", function ($login, $q, $constant) {
+.factory("$sinch", function ($login, $constant) {
 
   var sinchClient = new SinchClient({
     applicationKey: $constant.getApplicationKey(),
-    capabilities: {messaging: true}
+    capabilities: {messaging: true},
+    startActiveConnection: true,
+    onLogMessage: function (message) {
+      console.log("OnLogMessage triggered");
+      console.log(message);
+    }
   });
 
   var serviceInstance = {
