@@ -68,7 +68,9 @@ module.exports = {
       'bower_components/angular-ui-utils/modules/route/route.js',
       'bower_components/firebase/firebase.js',
       'bower_components/angularfire/dist/angularfire.min.js',
-      'bower_components/geofire/dist/geofire.min.js'
+      'bower_components/rsvp/rsvp.min.js',
+      'bower_components/geofire/dist/geofire.min.js',
+      'bower_components/angularGeoFire/dist/angularGeoFire.min.js'
     ],
     css: [
     ],

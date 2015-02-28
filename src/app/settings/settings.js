@@ -1,7 +1,8 @@
 angular.module( 'Wisen.settings', [
   'ui.router',
   'Wisen.firebaseTwitterLogin',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'angularGeoFire'
 ])
 
 /**
@@ -21,14 +22,15 @@ angular.module( 'Wisen.settings', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'SettingsCtrl', function ($scope, $login, $state) {
+.controller( 'SettingsCtrl', function ($scope, $login, $state, $geofire) {
 
   if ($login.getUid() === null) {
     $state.go("welcome");
   }
   
   var userObj = $login.getRef().child("users").child($login.getUid());
-  var geoFire = new GeoFire(userObj);
+  var $geo = $geofire(userObj);
+  $scope.shit = $geo;
 
   $scope.locationAlert = {
     type: "warning",
@@ -46,7 +48,7 @@ angular.module( 'Wisen.settings', [
       $scope.locationAlert.type = "info";
       $scope.locationAlert.msg = "location found";
       $scope.$digest();
-      geoFire.set("location", [
+      $geo.$set("location", [
         position.coords.latitude, 
         position.coords.longitude
       ]).then(function () {
