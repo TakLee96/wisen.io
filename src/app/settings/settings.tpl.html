@@ -1,1 +1,16 @@
-<div>This is Settings</div>
+<!--NavBar Custom Directive-->
+
+<form>
+  <label>Name:</label>
+  <input type="text" readonly ng-bind="name" />
+  <label>Tags:</label>
+  <div ng-repeat="(tag, val) in user.tags">
+    <input type="text" value="{{tag}}" />
+    <input type="button" ng-click="remove(tag)" value="X" />
+  </div>
+  <div ng-repeat="tag in newTags">
+    <input type="text" value="{{tag}}" placeholder="Tag Name" />
+  </div>
+  <input type="button" ng-click="addField()" value="+" />
+  <input type="button" ng-click="save()" value="save" />
+</form>

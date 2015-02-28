@@ -1,6 +1,6 @@
 angular.module( 'Wisen.settings', [
   'ui.router',
-  'firebase'
+  'firebaseTwitterLogin'
 ])
 
 /**
@@ -20,9 +20,41 @@ angular.module( 'Wisen.settings', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'SettingsCtrl', function ($scope, $firebase) {
+.controller( 'SettingsCtrl', function ($scope, $login) {
+  
+  var userObj = $login.getRef().child("users").child(getUid());
 
-  var ref = new Firebase("https://wisen.firebaseio.com/");
+  $scope.name = $login.getName();
+
+  userObj.on("value", function (user) {
+    $scope.user = user;
+  });
+
+  $scope.newTags = {"": true};
+
+  $scope.toRemove = {};
+
+  $scope.remove = function (key) {
+    $scope.toRemove[key] = true;
+    delete $scope.user[key];
+  };
+
+  $scope.addField = function () {
+    $scope.newTags[""] = true;
+  };
+
+  $scope.save = function () {
+    for (tag in $scope.toRemove) {
+      userObj.child(tag).remove();
+    }
+    for (tag in $scope.newTags) {
+      if (tag !== "") {
+        var obj = {};
+        obj[tag] = true;
+        userObj.child("tags").set(obj);
+      }
+    }
+  };
 
 })
 

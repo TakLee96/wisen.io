@@ -27,11 +27,11 @@ angular.module( 'Wisen.welcome', [
   }
 
   $scope.twitterLogin = function () {
-    $login.login(function (error, uid) {
+    $login.login(function (error, uid, name) {
       if (error) {
         console.log("Login Failed!", error);
       } else {
-        console.log("Login Successful:", uid);
+        console.log("Login Successful:", uid, name);
         $state.go("settings");
       }
     });
