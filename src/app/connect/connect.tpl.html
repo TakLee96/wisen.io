@@ -7,14 +7,6 @@
 
 <input type="button" ng-click="send()" value="send">
 
-<p>
-  <div>Preview:</div>
-  <div>senderId: {{prevView.senderId}}</div>
-  <div>recipientId: {{prevView.recipientId}}</div>
-  <div>textBody: {{prevView.textBody}}</div>
-</p>
 <p ng-repeat="message in messages">
-  <div>sender: {{message.senderId}}</div>
-  <div>recipient: {{message.recipientId}}</div>
-  <div>textBody: {{message.textBody}}</div>
+at:[{{message.timestamp}}] from:[{{message.senderId}}] to:[{{message.recipientId}}] message:{{message.textBody}}
 </p>
