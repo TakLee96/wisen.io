@@ -13,31 +13,31 @@ angular.module("Wisen.sinchClient", [
   };
 })
 //b063ab0f-bfbc-4a6a-b191-401d579cb8cf
-.factory("$sinch", function ($login, $q, $constant) {
+.factory("$sinch", ["$login", "$q", "$constant", function ($login, $q, $constant) {
 
   var sinchClient = new SinchClient({
     applicationKey: $constant.getApplicationKey(),
     capabilities: {messaging: true}
   });
 
-  var messageClient = sinchClient.getMessageClient();
-
   var serviceInstance = {
     sinchClient: sinchClient,
-    messageClient: messageClient,
+    messageClient: null,
     getClient: function () {
       return this.sinchClient;
     },
     startClient: function (cb, errorHandler) { 
       var user = {
-        username: $login.getUid().slice(8),
+        username: $login.getSinchUsername(),
         password: $constant.getCommonPassword()
       };
       sinchClient.newUser(user, function (ticket) {
         sinchClient.start(ticket).then(cb).fail(errorHandler);
       }, function (error) {
         sinchClient.start(user, cb).fail(errorHandler);
-      });
+      }).then(function () {
+        this.messageClient = sinchClient.getMessageClient();
+      }.bind(this));
     },
     getMessageClient: function () {
       return this.messageClient;
@@ -61,6 +61,6 @@ angular.module("Wisen.sinchClient", [
 
   return serviceInstance;
 
-})
+}])
 
 ;

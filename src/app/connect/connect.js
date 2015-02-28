@@ -9,24 +9,24 @@ angular.module( 'Wisen.connect', [
  * will handle ensuring they are all available at run-time, but splitting it
  * this way makes each module more "self-contained".
  */
-.config(function config( $stateProvider ) {
+.config(["$stateProvider", function config( $stateProvider ) {
   $stateProvider.state( 'connect', {
     url: '/connect',
     controller: 'ConnectCtrl',
     templateUrl: 'connect/connect.tpl.html',
     data:{ pageTitle: 'Connect' }
   });
-})
+}])
 
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'ConnectCtrl', function ($scope, $sinch, $login) {
+.controller( 'ConnectCtrl', ["$scope", "$sinch", "$login", function ($scope, $sinch, $login) {
 
   $scope.messages = [];
 
   $sinch.startClient(function () {
-    global_username = $login.getUid().slice(8);
+    global_username = $login.getSinchUsername();
   }, function (error) {
     console.log(error);
   });
@@ -46,6 +46,15 @@ angular.module( 'Wisen.connect', [
     messages.push(message);
     $scope.text = "";
   };
+
+  $sinch.onIncomingMessage = function (message) {
+    var message = {
+      senderId: message.senderId,
+      recipientId: $login.getSinchUsername(),
+      content: message.textBody
+    };
+    messages.push(message);
+  }
 
 })
 
