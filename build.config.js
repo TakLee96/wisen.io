@@ -38,7 +38,7 @@ module.exports = {
    */
   test_files: {
     js: [
-      'vendor/angular-mocks/angular-mocks.js'
+      'bower_components/angular-mocks/angular-mocks.js'
     ]
   },
 
@@ -62,10 +62,12 @@ module.exports = {
    */
   vendor_files: {
     js: [
-      'vendor/angular/angular.js',
-      'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      'vendor/angular-ui-router/release/angular-ui-router.js',
-      'vendor/angular-ui-utils/modules/route/route.js'
+      'bower_components/angular/angular.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/angular-ui-utils/modules/route/route.js',
+      'bower_components/firebase/firebase.js',
+      'bower_components/angularfire/dist/angularfire.min.js'
     ],
     css: [
     ],

@@ -20,6 +20,7 @@ angular.module( 'Wisen.welcome', [
  * And of course we define a controller for our route.
  */
 .controller( 'WelcomeCtrl', function ($scope) {
+  $scope.OAuth = {};
 })
 
 ;
