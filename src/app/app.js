@@ -28,7 +28,7 @@ angular.module( 'Wisen', [
       }
       if (toState.name === "connect") {
         console.log("going to state connect");
-        connect.log($track.getRecipient());
+        console.log($track.getRecipient());
         console.log("-----------------------");
         $sinch.registerRecipient($track.getRecipient());
       }

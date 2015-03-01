@@ -61,6 +61,7 @@ angular.module( 'Wisen.connect', [
 
   $scope.$on("recipientRegistered", function (event, recipient) {
     console.log("recipientRegistered event caught");
+    console.log(recipient);
     $scope.sinchUsername.receiver = $sinch.getSinchUsername();
     $scope.sinchUsername.sender = $login.getSinchUsername();
     $scope.name.receiver = $sinch.getName();

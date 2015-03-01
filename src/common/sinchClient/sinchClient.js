@@ -90,6 +90,9 @@ angular.module("Wisen.sinchClient", [
       return this.recipientName;
     },
     getSinchUsername: function () {
+      console.log("getSinchUsername");
+      console.log(this.recipientUID);
+      console.log(this.recipientName);
       return this.recipientUID.slice(8);
     }
   };
