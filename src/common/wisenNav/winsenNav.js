@@ -19,7 +19,7 @@ angular.module("Wisen.nav", [
   return {
     restrict: 'EA',
     controller: 'navCtrl',
-    templateUrl: 'nav/nav.tpl.html'
+    templateUrl: 'wisenNav/wisenNav.tpl.html'
   };
 
 })

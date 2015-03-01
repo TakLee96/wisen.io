@@ -20,13 +20,13 @@ angular.module( 'Wisen.welcome', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'WelcomeCtrl', function ($scope, $login, $state) {
+.controller( 'WelcomeCtrl', function ($scope, $login, $state, $rootScope) {
 
   if ($login.getUid()) {
     $state.go("settings");
   }
 
-  $scope.twitterLogin = function () {
+  $rootScope.twitterLogin = function () {
     $login.login(function (error, uid) {
       if (error) {
         console.log("Login Failed!", error);

@@ -65,6 +65,9 @@ angular.module("Wisen.firebaseTwitterLogin", [
     getRef: function () {
       return this.ref;
     },
+    getDefaultRef: function () {
+      return new Firebase("https://wisen.firebaseio.com/");
+    },
     getSinchUsername: function () {
       return this.getUid().slice(8);
     },

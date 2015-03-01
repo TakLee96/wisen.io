@@ -3,7 +3,8 @@ angular.module( 'Wisen.explore', [
   'firebase',
   'angularGeoFire',
   'Wisen.firebaseTwitterLogin',
-  'uiGmapgoogle-maps'
+  'uiGmapgoogle-maps',
+  'Wisen.brain'
 ])
 
 /**
@@ -23,7 +24,7 @@ angular.module( 'Wisen.explore', [
 /**
  * And of course we define a controller for our route.
  */
-.controller('ExploreCtrl', function ($scope, $geofire, $login) {
+.controller('ExploreCtrl', function ($scope, $geofire, $login, $brain) {
 
   var RANGE_CONSTANT = 10;
 
@@ -47,14 +48,38 @@ angular.module( 'Wisen.explore', [
     clickable: false
   };
 
-  // $scope.search = function () {
-  //   var tagName = $scope.searchTag;
-  //   // TODO
-  // };
+  $scope.search = function () {
+    var tagName = $scope.searchTag;
+    var done = false;
+    $brain.figureOutBestMentorByTag(tagName, $scope.circles, function (location) {
+      if (done) {
+        return;
+      } else if (location) {
+        done = true;
+        $scope.$emit("mentorFound", location);
+      } else {
+        done = true;
+        $scope.$emit("mentorNotFound");
+      }
+    });
+  };
+
+  $scope.$on("mentorFound", function (event, args) {
+    alert("YAY!!!");
+    console.log(args.key);
+    $scope.sendRequestToMentor(args.key);
+  });
+
+  $scope.$on("mentorNotFound", function (event) {
+    alert("FUCKED! MNFError!");
+  });
 
   $scope.handleClick = function (key) {
-    console.log(key + " Clicked!");
-    console.log($scope.circles[key]);
+    $scope.sendRequestToMentor(key);
+  };
+
+  $scope.sendRequestToMentor = function (key) {
+    console.log("sending request to " + key);
   };
 
   $geo.$get($login.getUid())
@@ -66,7 +91,7 @@ angular.module( 'Wisen.explore', [
         $scope.range.center.longitude = location[1];
         $scope.$emit("locationRetrieved");
       } else {
-        console.log("FUCKED!");
+        console.log("FUCKED! NullLocationError!");
       }
     });
 
@@ -108,6 +133,7 @@ angular.module( 'Wisen.explore', [
         click: function (circle, event, model, args) {
           console.log(circle);
           console.log("selected");
+          $scope.handleClick(circle.key);
         }
       }
     };
