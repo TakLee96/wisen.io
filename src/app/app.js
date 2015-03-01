@@ -27,7 +27,16 @@ angular.module( 'Wisen', [
           }
           $state.go("welcome");
       }
-
+      if ($track.hasNotInit()) {
+        $track.init();
+      }
+      if (toState.name === "connect") {
+        console.log("going to state connect...");
+        var recipient = $track.getRecipient();
+        console.log("recipient is now in app.js");
+        console.log(recipient);
+        $sinch.registerRecipient(recipient);
+      }
   });
 
   $scope.$on('$stateChangeStart', function (event, toState) {
@@ -38,9 +47,6 @@ angular.module( 'Wisen', [
         console.log("recipient is now in app.js");
         console.log(recipient);
         $sinch.registerRecipient(recipient);
-      }
-      if ($track.hasNotInit()) {
-        $track.init();
       }
   });
 

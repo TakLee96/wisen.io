@@ -3,7 +3,7 @@ angular.module("Wisen.userInfoTracking", [
   'angularGeoFire'
 ])
 
-.factory("$track", function ($login, $interval, $state, $geofire) {
+.factory("$track", function ($login, $interval, $state, $geofire, $rootScope) {
 
   var TRACT_PERIOD_CONSTANT = 20 * 1000;
   var RANGE_CONSTANT = 10;
