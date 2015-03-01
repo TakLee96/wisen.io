@@ -43,7 +43,7 @@ angular.module( 'Wisen.explore', [
     },
     stroke: {
       color: "$B2089B",
-      weight: 3,
+      weight: 2,
       opacity: 1
     },
     clickable: false
@@ -134,7 +134,8 @@ angular.module( 'Wisen.explore', [
         opacity: 0.5
       },
       clickable: true,
-      draggable: true
+      draggable: true,
+      geodesic: true
     };
   });
 
