@@ -1,14 +1,15 @@
 all:
+	npm install
+	bower install
 	grunt
 	npm start
 
 force:
+	npm install
+	bower install
 	grunt --force
 	npm start
 
-launch:
-	npm start
-
 speed:
-	grunt build
+	grunt build --force
 	npm start
