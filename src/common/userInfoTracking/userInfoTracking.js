@@ -13,7 +13,6 @@ angular.module("Wisen.userInfoTracking", [
   var getGeolocation = function (cb) {
     console.log("getting geoLocation");
     if (navigator.geolocation) {
-      console.log("geoLocation available for browser");
       navigator.geolocation.getCurrentPosition(function (position) {
         console.log("(lat: %s, lng: %s)", position.coords.latitude, position.coords.longitude);
         cb({latitude: position.coords.latitude, longitude: position.coords.longitude});
@@ -22,7 +21,6 @@ angular.module("Wisen.userInfoTracking", [
       //upload
     } else {
       //download
-      console.log("geoLocation NOT available for browser, downloading from firebase");
       $myGeo.$get("location").then(function (location) {
         console.log("(lat: %s, lng: %s)", location[0], location[1]);
         cb({latitude: location[0], longitude: location[1]}); //could error
@@ -31,7 +29,6 @@ angular.module("Wisen.userInfoTracking", [
   };
 
   var queryLocation = function (lat, lng) {
-    console.log("querying on (lat: %s, lng: %s)", lat, lng);
     $geo.$query({
       center: [lat, lng],
       radius: RANGE_CONSTANT
@@ -63,13 +60,11 @@ angular.module("Wisen.userInfoTracking", [
     },
     init: function () {
       this.initted = true;
-      console.log("init called!");
 
       $myGeo = $geofire($login.getRef().child("users").child($login.getUid()));
 
       var func = function () {
         getGeolocation(function (location) {
-          console.log("Back to init (lat: %s, lng: %s)", location.latitude, location.longitude);
           this.latitude = location.latitude;
           this.longitude = location.longitude;
           $rootScope.$broadcast("myLocationChange", location);
@@ -124,7 +119,7 @@ angular.module("Wisen.userInfoTracking", [
               $login.getRef().child("requests").child(requestID).update({status: 2});
               $login.getRef().child("users").child(request.mentorUID).child("displayName").once("value", function (name) {
                 alert("Wisen user "+name.val()+" accepts your request to learn #" + request.tag);
-                $state.go("connect", {recipientUId: request.mentorUID, recipientName: name});
+                $state.go("connect", {recipientUID: request.mentorUID, recipientName: name});
               }); 
             } else {
               //I'm down, reply that I have quited

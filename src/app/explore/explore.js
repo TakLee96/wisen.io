@@ -75,16 +75,12 @@ angular.module( 'Wisen.explore', [
 
   $scope.$on("mentorFound", function (event, config) {
     alert("YAY!!!");
-    $scope.mentor = config;
-    $scope.searchResult.result = "Based on your geolocation, we carefully chose this mentor for you.";
     console.log(config);
     $scope.sendRequestToMentor(config);
   });
 
   $scope.$on("mentorNotFound", function (event) {
-    alert("FUCKED! MNFError!");
-    $scope.searchResult.result = "Sorry! Based on your geolocation, we could not find a mentor for you.";
- 
+    alert("FUCKED! MNFError!"); 
   });
 
   $scope.sendRequestToMentor = function (config) {
@@ -101,6 +97,8 @@ angular.module( 'Wisen.explore', [
   };
 
   $scope.$on("myLocationChange", function (event, location) {
+    console.log("myLocationChange event caught");
+
     if ($scope.myCircle) {
       $scope.myCircle.center.latitude = location.latitude;
       $scope.myCircle.center.longitude = location.longitude;
@@ -137,6 +135,8 @@ angular.module( 'Wisen.explore', [
   };
 
   $scope.$on("multipleLocationChange", function (event, key, location, distance) {
+    console.log("multipleLocationChange event caught");
+
     if (key !== $login.getUid()) {
       if (!$scope.circles[key]) {
         $scope.circles[key] = {
