@@ -1,10 +1,21 @@
 <div id="exploreBg">
     <div id="exploreLeft" class="clearfix">
         <div class="form-group" style="width: 40%">
-             <label>Search using a tag:</label>
-            <input type="search" ng-model="searchTag" class="form-control"/>
-        </br>
+            <label>Search using a tag:
+            <input type="search" ng-model="searchTag" class="form-control"/></label>
+            </br>
             <button type="button" ng-click="search()" class="btn btn-primary"/> Search </button>
+        </div>
+    
+        <div style="height: 500px; width: 90%;">
+        <carousel interval="myInterval">
+          <slide ng-repeat="slide in slides" active="slide.active">
+            <img ng-src="{{slide.image}}" style="margin:auto;">
+            <div class="carousel-caption">
+              <h4>{{slide.text}}</h4>
+            </div>
+          </slide>
+        </carousel>
         </div>
     </div>
 
