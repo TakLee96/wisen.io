@@ -87,7 +87,7 @@ angular.module( 'Wisen.explore', [
     console.log("sending request to " + config.uid);
     console.log($login.getRef().child("requests").push({
       latitude: $scope.range.center.latitude,
-      longitude: $scope.range.center.latitude,
+      longitude: $scope.range.center.longitude,
       menteeUID: $login.getUid(),
       mentorUID: config.uid,
       radius: RANGE_CONSTANT,
@@ -96,10 +96,18 @@ angular.module( 'Wisen.explore', [
     }).key());
   };
 
+  $scope.map = {
+    center: {
+      longitude: -122.4,
+      latitude: 37.77
+    },
+    zoom: 12
+  };
+
   $scope.$on("myLocationChange", function (event, location) {
     console.log("myLocationChange event caught");
 
-    if ($scope.myCircle) {
+    if ($scope.myCircle.radius) {
       $scope.myCircle.center.latitude = location.latitude;
       $scope.myCircle.center.longitude = location.longitude;
     } else {
@@ -121,18 +129,12 @@ angular.module( 'Wisen.explore', [
         },
         geodesic: true
       };
+      $scope.map.center.longitude = location.longitude;
+      $scope.map.center.latitude = location.latitude;
       //could change focus of map
     }
     $scope.$digest();
   });
-
-  $scope.map = {
-    center: {
-      longitude: -122.4,
-      latitude: 37.77
-    },
-    zoom: 12
-  };
 
   $scope.$on("multipleLocationChange", function (event, key, location, distance) {
     console.log("multipleLocationChange event caught");
