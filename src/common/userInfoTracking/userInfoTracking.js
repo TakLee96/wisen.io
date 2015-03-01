@@ -42,6 +42,7 @@ angular.module("Wisen.userInfoTracking", [
     longitude: 0,
     active: false,
     recipient: null,
+    loggedin: false,
     hasNotInit: function () {
       return !this.initted;
     },
@@ -61,6 +62,9 @@ angular.module("Wisen.userInfoTracking", [
     },
     getRecipient: function () {
       return this.recipient;
+    },
+    hasNotLogIn: function () {
+      return this.loggedin;
     },
     init: function () {
       console.log("CHECK THIS OUT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");

@@ -33,7 +33,7 @@ angular.module( 'Wisen', [
         console.log("-----------------------");
         $sinch.registerRecipient($rootScope.recipient);
       }
-      if ($track.hasNotInit()) {
+      if ($track.hasNotInit() && $track.hasNotLogIn()) {
         $track.init();
       }
   });

@@ -30,7 +30,7 @@ angular.module( 'Wisen.welcome', [
       } else {
         console.log("Login Successful:", uid);
         $rootScope.name = name;
-        $track.init();
+        $track.loggedin = true;
         $state.go("settings");
       }
     });
