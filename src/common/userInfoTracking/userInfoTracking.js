@@ -5,7 +5,7 @@ angular.module("Wisen.userInfoTracking", [
 
 .factory("$track", function ($login, $rootScope, $interval, $state, $geofire) {
 
-  var TRACT_PERIOD_CONSTANT = 10 * 1000;
+  var TRACT_PERIOD_CONSTANT = 20 * 1000;
   var RANGE_CONSTANT = 10;
   var $myGeo = null;
   var $geo = $geofire($login.getRef().child("userLocations"));
@@ -85,8 +85,7 @@ angular.module("Wisen.userInfoTracking", [
       $login.getRef().child("requests").orderByKey().on("child_added", superUpdate.bind(this));
       $login.getRef().child("requests").orderByKey().on("child_changed", superUpdate.bind(this));
     },
-    update: null,
-    data: null
+    update: null
   };
 
   function superUpdate (data) {
@@ -117,7 +116,10 @@ angular.module("Wisen.userInfoTracking", [
                   $login.getRef().child("requests").child(requestID).update({status: 1});
                   alert("You accepted his/her request");
                   $state.go("connect");
-                  service.recipient = {recipientUID: request.menteeUID, recipientName: name.val()};
+                  $rootScope.recipient = {recipientUID: request.menteeUID, recipientName: name.val()};
+                  $rootScope.$emit("Event");
+                  console.log($rootScope.recipient);
+                  console.log("rootScope!!!!! STEP 0");
                 } else {
                   //reject
                   console.log("In disagree route");
@@ -140,7 +142,10 @@ angular.module("Wisen.userInfoTracking", [
               $login.getRef().child("users").child(request.mentorUID).child("displayName").once("value", function (name) {
                 alert("Wisen user "+name.val()+" accepts your request to learn #" + request.tag);
                 $state.go("connect");
-                service.recipient = {recipientUID: request.mentorUID, recipientName: name.val()};
+                $rootScope.recipient = {recipientUID: request.mentorUID, recipientName: name.val()};
+                $rootScope.$emit("Event");
+                console.log($rootScope.recipient);
+                console.log("rootScope!!!!! STEP 1");
               }); 
             } else {
               //I'm down, reply that I have quited
@@ -152,7 +157,7 @@ angular.module("Wisen.userInfoTracking", [
           break;
         case 3:
           console.log(service);
-          if (service.isActive() && requestID === service.data.key()) {
+          if (service.isActive() && requestID === data.key()) {
             service.becomeInactive();
           }
           break;

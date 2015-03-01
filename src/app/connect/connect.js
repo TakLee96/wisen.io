@@ -26,10 +26,12 @@ angular.module( 'Wisen.connect', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'ConnectCtrl', function ($scope, $sinch, $login, $track) { 
+.controller( 'ConnectCtrl', function ($scope, $sinch, $login, $track, $rootScope) { 
+
+  $rootScope.$digest();
 
   $scope.messages = [];
-  $scope.text = "";
+  $scope.content = "";
   $scope.ready = false;
 
   $scope.imageURL = {
@@ -47,38 +49,30 @@ angular.module( 'Wisen.connect', [
     receiver: ""
   };
 
-  $scope.sinchUsername.receiver = $track.getRecipient().recipientUID.slice(8);
-  $scope.sinchUsername.sender = $login.getSinchUsername();
-  $scope.name.receiver = $sinch.getRecipient().recipientName;
-  $scope.name.sender = $login.getName();
-
-  var resolve = function () {
-    console.log("resolving");
-    $sinch.getImageURL(function (url) {
-      $scope.imageURL.receiver = url;
-      $login.getImageURL(function (img) {
+  $rootScope.$on("Event", function () {
+    console.log("Event!");
+    $since.registerRecipient($rootScope.recipient);
+    $scope.sinchUsername.receiver = $rootScope.recipientUID.slice(8);
+    $scope.sinchUsername.sender = $login.getSinchUsername();
+    $scope.name.receiver = $rootScope.recipientName;
+    $scope.name.sender = $login.getName();
+    $sinch.getImageURL(function (img) {
+      $scope.imageURL.receiver = img;
+      $login.getImageURL(function (image) {
         $scope.imageURL.sender = img;
-        $scope.resolved();
+        $since.startClient(function () {
+          global_username = $login.getSinchUsername();
+          $scope.$digest();
+        }, function (error) {
+          console.log(error);
+        });
       });
-    });
-  };
-
-  resolve();
-
-  $scope.resolved = function () {
-    console.log("senderReceiverResolved event caught");
-    $sinch.startClient(function () {
-      global_username = $login.getSinchUsername();
-      $scope.ready = true;
-      $scope.$digest();
-    }, function (error) {
-      console.log(error);
-    });
-  };
+    });  
+  });
 
   $scope.send = function () {
-    console.log("send!" + $scope.text);
-    $sinch.sendMessage($scope.text, function (error) {
+    console.log("send!" + $scope.content);
+    $sinch.sendMessage($scope.content, function (error) {
       console.log(error);
     });
   };
@@ -100,7 +94,7 @@ angular.module( 'Wisen.connect', [
     console.log(receivedInfo);
     $scope.messages.push(message);
     if (receivedInfo.direction) {
-      $scope.text = "";
+      $scope.content = "";
     }
     $scope.$digest();
   });

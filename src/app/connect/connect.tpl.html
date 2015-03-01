@@ -8,12 +8,17 @@
             </label>
             </br>
             <label style="color:rgb(124,142,159); margin-left:40%;">Text 
-                <input type="text" ng-model="text" class="form-control" placeholder="Say hi to your him/her!"/>
+                <input type="text" ng-model="content" class="form-control" placeholder="Say hi to your him/her!"/>
             </label>
             </br>
             <button class="btn btn-info" ng-click="send()" style="margin-left:50%; margin-top:10px;">Send</button>
         </form>
     </div>
+
+    <div>{{recipient}}</div>
+    <div>{{imageURL}}</div>
+    <div>{{name}}</div>
+    <div>{{sinchUsername}}</div>
 
     <div ng-repeat="message in messages | orderBy: message.timestamp">
         <div id="chatBox" class="clearfix">

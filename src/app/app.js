@@ -16,7 +16,7 @@ angular.module( 'Wisen', [
   $urlRouterProvider.otherwise( '/welcome' );
 })
 
-.controller( 'AppCtrl', function ($scope, $location, $login, $state, $sinch, $track) {
+.controller( 'AppCtrl', function ($scope, $location, $login, $state, $sinch, $track, $rootScope) {
 
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
       $scope.pageTitle = toState.data.pageTitle + ' | Wisen';
@@ -28,9 +28,10 @@ angular.module( 'Wisen', [
       }
       if (toState.name === "connect") {
         console.log("going to state connect");
-        console.log($track.getRecipient());
+        console.log("$rootScope current has:");
+        console.log($rootScope.recipient);
         console.log("-----------------------");
-        $sinch.registerRecipient($track.getRecipient());
+        $sinch.registerRecipient($rootScope.recipient);
       }
       if ($track.hasNotInit()) {
         $track.init();
