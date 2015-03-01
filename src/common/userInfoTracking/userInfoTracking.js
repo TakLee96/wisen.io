@@ -117,7 +117,7 @@ angular.module("Wisen.userInfoTracking", [
                   $login.getRef().child("requests").child(requestID).update({status: 1});
                   alert("You accepted his/her request");
                   console.log(service.recipient);
-                  service.recipient = {recipientUID: request.menteeUID, recipientName: name.val()};
+                  service.recipient = {recipientUID: request.mentorUID, recipientName: name.val()};
                   console.log("recipient attribute in service");
                   $state.go("connect");
                   console.log(service.recipient);
