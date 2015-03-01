@@ -1,6 +1,12 @@
-<!-- <p ng-repeat="message in messages">
-at:[] from:[{{message.senderId}}] to:[{{message.recipientId}}] message:
-</p> -->
+<div>This is Connect</div>
+
+<input type="text" ng-model="text" />
+
+<input type="button" ng-click="send()" value="send">
+
+<p ng-repeat="message in messages">
+at:[{{message.timestamp}}] from:[{{message.senderId}}] to:[{{message.recipientId}}] message:{{message.textBody}}
+</p>
 
 <!-- <div id="profilePicture" style="background-image:url({{CHANGE TO TOUXIANG}});"> </div> -->
 <div id="chatContainer" class="chatContainer clearfix" style="backgronud-color: rgb(43, 132, 222);">

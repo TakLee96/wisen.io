@@ -45,9 +45,9 @@ angular.module("Wisen.sinchClient", [
     getMessageClient: function () {
       return this.messageClient;
     },
-    sendMessage: function (recipient, text, errorHandler) {
+    sendMessage: function (text, errorHandler) {
       this.getMessageClient()
-        .send(this.getMessageClient().newMessage(recipient, text))
+        .send(this.getMessageClient().newMessage(this.getRecipientID(), text))
         .fail(errorHandler);
     },
     onIncomingMessage: function (handler) {
@@ -59,6 +59,20 @@ angular.module("Wisen.sinchClient", [
       this.getMessageClient().addEventListener({
         onMessageDelivered: handler
       });
+    },
+    registerRecipient: function (recipient) {
+      this.recipientUID = recipient.recipientUID;
+      this.recipientName = recipient.recipientName;   
+    },
+    getImageURL: function (cb) {
+      $login.getRef().child("users").child(recipient.recipientUID).child("profileImageURL").once("value", function (img) {
+        cb(img.val());
+      }.bind(this));
+    },
+    recipientUID: null,
+    recipientName: null,
+    getName: function () {
+      return this.recipientName;
     }
   };
 

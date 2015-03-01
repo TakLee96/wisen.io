@@ -51,36 +51,40 @@ angular.module( 'Wisen.explore', [
 
   $scope.search = function () {
     var tagName = $scope.searchTag;
-    var done = false;
-    $brain.figureOutBestMentorByTag(tagName, $scope.circles, function (location) {
-      if (done) {
-        return;
-      } else if (location) {
-        done = true;
-        $scope.$emit("mentorFound", location);
-      } else {
-        done = true;
-        $scope.$emit("mentorNotFound");
-      }
-    });
+    if (tagName.trim() !== "") {
+      $brain.figureOutBestMentorByTag(tagName, $scope.circles, function (uid) {
+        if (uid) {
+          $scope.$emit("mentorFound", {uid: uid, tag: tagName});
+        } else {
+          $scope.$emit("mentorNotFound");
+        }
+      });
+    } else {
+      alert("Please provide a tag!");
+    }
   };
 
-  $scope.$on("mentorFound", function (event, args) {
+  $scope.$on("mentorFound", function (event, config) {
     alert("YAY!!!");
-    console.log(args.key);
-    $scope.sendRequestToMentor(args.key);
+    console.log(config);
+    $scope.sendRequestToMentor(config);
   });
 
   $scope.$on("mentorNotFound", function (event) {
     alert("FUCKED! MNFError!");
   });
 
-  $scope.handleClick = function (key) {
-    $scope.sendRequestToMentor(key);
-  };
-
-  $scope.sendRequestToMentor = function (key) {
+  $scope.sendRequestToMentor = function (config) {
     console.log("sending request to " + key);
+    $login.getRef().child("requests").push({
+      latitude: $scope.range.center.latitude,
+      longitude: $scope.range.center.latitude,
+      menteeUID: $login.getUid(),
+      mentorUID: config.uid,
+      radius: RANGE_CONSTANT,
+      status: 0,
+      tag: config.tag
+    });
   };
 
   $geo.$get($login.getUid())
@@ -130,11 +134,7 @@ angular.module( 'Wisen.explore', [
         opacity: 0.5
       },
       clickable: true,
-      events: {
-        click: function () {
-          $scope.sendRequestToMentor(key);
-        }
-      }
+      draggable: true
     };
   });
 

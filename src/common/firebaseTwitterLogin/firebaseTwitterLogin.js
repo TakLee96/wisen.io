@@ -65,9 +65,6 @@ angular.module("Wisen.firebaseTwitterLogin", [
     getRef: function () {
       return this.ref;
     },
-    getDefaultRef: function () {
-      return new Firebase("https://wisen.firebaseio.com/");
-    },
     getSinchUsername: function () {
       return this.getUid().slice(8);
     },
@@ -76,10 +73,15 @@ angular.module("Wisen.firebaseTwitterLogin", [
     },
     update: function (twitter) {
       var user = {
-        image: twitter.cachedUserProfile.profile_image_url,
-        name: twitter.displayName
+        profileImageURL: twitter.cachedUserProfile.profile_image_url,
+        displayName: twitter.displayName
       };
       this.getRef().child('users').child(this.getUid()).update(user);
+    },
+    getImageURL: function (cb) {
+      this.getRef().child("users").child(this.getUid()).child("profileImageURL").once("value", function (data) {
+        cb(data.val());
+      });
     }
   };
 
