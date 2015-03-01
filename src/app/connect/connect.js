@@ -26,7 +26,7 @@ angular.module( 'Wisen.connect', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'ConnectCtrl', function ($scope, $sinch, $login, $rootScope) {
+.controller( 'ConnectCtrl', function ($scope, $sinch, $login, $track) { 
 
   $scope.messages = [];
   $scope.text = "";
@@ -47,29 +47,25 @@ angular.module( 'Wisen.connect', [
     receiver: ""
   };
 
+  $scope.sinchUsername.receiver = $track.getRecipient().recipientUID.slice(8);
+  $scope.sinchUsername.sender = $login.getSinchUsername();
+  $scope.name.receiver = $sinch.getRecipient().recipientName;
+  $scope.name.sender = $login.getName();
+
   var resolve = function () {
     console.log("resolving");
     $sinch.getImageURL(function (url) {
       $scope.imageURL.receiver = url;
       $login.getImageURL(function (img) {
         $scope.imageURL.sender = img;
-        $scope.$emit("senderReceiverResolved");
-        $scope.$digest();
+        $scope.resolved();
       });
     });
   };
 
-  $rootScope.$on("recipientRegistered", function (event, recipient) {
-    console.log("recipientRegistered event caught");
-    console.log(recipient);
-    $scope.sinchUsername.receiver = $sinch.getSinchUsername();
-    $scope.sinchUsername.sender = $login.getSinchUsername();
-    $scope.name.receiver = $sinch.getName();
-    $scope.name.sender = $login.getName();
-    resolve();
-  });
+  resolve();
 
-  $scope.$on("senderReceiverResolved", function () {
+  $scope.resolved = function () {
     console.log("senderReceiverResolved event caught");
     $sinch.startClient(function () {
       global_username = $login.getSinchUsername();
@@ -78,7 +74,7 @@ angular.module( 'Wisen.connect', [
     }, function (error) {
       console.log(error);
     });
-  });
+  };
 
   $scope.send = function () {
     console.log("send!" + $scope.text);
