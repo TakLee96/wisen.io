@@ -61,7 +61,7 @@ angular.module( 'Wisen.explore', [
         done = true;
         $scope.$emit("mentorNotFound");
       }
-    })
+    });
   };
 
   $scope.$on("mentorFound", function (event, args) {
@@ -133,6 +133,7 @@ angular.module( 'Wisen.explore', [
         click: function (circle, event, model, args) {
           console.log(circle);
           console.log("selected");
+          $scope.handleClick(circle.key);
         }
       }
     };

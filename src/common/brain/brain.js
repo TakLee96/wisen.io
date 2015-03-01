@@ -1,5 +1,5 @@
 angular.module("Wisen.brain", [
-  'firebaseTwitterLogin'
+  'Wisen.firebaseTwitterLogin'
 ])
 
 .factory("$brain", function ($login) {
@@ -14,7 +14,7 @@ angular.module("Wisen.brain", [
           $login.getDefaultRef().child(list[k].key).child("tags").off("child_added");
         }
         cb(null);
-      }, 5000);
+      }, 10000);
       for (var i = 0; i < list.length; i++) {
         this.__iter__(list, list[i], tag, cb);
       }
