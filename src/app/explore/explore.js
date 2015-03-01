@@ -66,7 +66,7 @@ angular.module( 'Wisen.explore', [
           $scope.$emit("mentorFound", {uid: uid, tag: tagName});
         } else {
           $scope.$emit("mentorNotFound");
-        }
+         }
       });
     } else {
       alert("Please provide a tag!");
@@ -75,12 +75,16 @@ angular.module( 'Wisen.explore', [
 
   $scope.$on("mentorFound", function (event, config) {
     alert("YAY!!!");
+    $scope.mentor = config;
+    $scope.searchResult.result = "Based on your geolocation, we carefully chose this mentor for you.";
     console.log(config);
     $scope.sendRequestToMentor(config);
   });
 
   $scope.$on("mentorNotFound", function (event) {
     alert("FUCKED! MNFError!");
+    $scope.searchResult.result = "Sorry! Based on your geolocation, we could not find a mentor for you.";
+ 
   });
 
   $scope.sendRequestToMentor = function (config) {

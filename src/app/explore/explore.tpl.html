@@ -6,7 +6,16 @@
         </br>
             <button type="button" ng-click="search()" class="btn btn-primary"/> Search </button>
         </div>
-        <div class="mentorInfo" ng-show="{{done}}">
+        <!-- <span ng-bind="searchResult"></span> -->
+        <div class="mentorInfo" >
+            <!-- <span ng-bind="mentor" value="{{mentor}}"></span> -->
+            <img src="assets/defaultProfile.png" id="mentorBox" class="clearfix"/>
+                <p id="mentorText">
+                Name&#x3a;<br /><br />Common Interests&#x3a;<br /><br /><br />Do you want him&#x2f;her to be your mentor&#x3f;<br />
+                </p>
+                <button type="button" class="btn btn-danger">Not really.</button>
+            </br>
+                <button type="button" class="btn btn-success" ng-click="">Yes!</button>
         </div>
     </div>
 

@@ -1,17 +1,16 @@
 <div id="primaryContainer" class="primaryContainer clearfix">
     <div id="settings" class="clearfix">
                 <div id="setting" class="clearfix">
-                    <p id="text1"> Tag your skills&#x3a; </p>
+                    <p id="text1"> <span ng-bind="name || 'guest'" > </span>, </br> tag your skills&#x3a; </p>
                     <p id="text2">
-                    Add some things that you are good at&#x21; People nearby you will see your strengths, too.&nbsp;eg. cooking, skateboarding, etc.
+                    Add some things that you are good at, &nbsp;eg. cooking, skateboarding, etc. People nearby you will see your strengths, too&#x21; 
                     </p>
                     <form>
-                        <div class="clearfix">
-                            <input type="text" value="{{tag}}" popover="eg. cooking, biking, origami..."  popover-trigger="mouseenter" class="form-control" ng-repeat="tag in newTags track by $index" ng-model="newTags[$index]" id="input" placeholder="Please enter your skill here...">
+                        <div class="clearfix skillInput">
+                            <input type="text" value="{{tag}}"  popover-trigger="mouseenter" class="form-control" ng-repeat="tag in newTags track by $index" ng-model="newTags[$index]" id="input" placeholder="Please enter your skill here...">
                             <!-- <input  type="text" class="" value="{{tag}}" ng-repeat="tag in newTags track by $index" ng-model="newTags[$index]"/> -->
-                            <button type="button" ng-click="addField()" id="add" class="btn btn-info clearfix" ng-model="singleModel"> <span id="text4"> Add </span> </button>
                             <button type="button" ng-click="save()" id="save" class="btn btn-primary clearfix" ng-model="singleModel"
-                                btn-checkbox> <span id="text5">Save</span> </button>
+                                btn-checkbox> <span id="text5">Add</span> </button>
 
                         </div>
                     </form>
