@@ -31,7 +31,21 @@ angular.module( 'Wisen.explore', [
   var RANGE_CONSTANT = $track.getRangeConstant();
 
   var $geo = $geofire($login.getRef().child("userLocations"));
-  
+  $scope.config = null;
+  $scope.searchResult = {
+    displayName: "",
+    profileImageURL: ""
+  };
+
+
+  $scope.allow = function () {
+    $scope.sendRequestToMentor(config);
+  };
+
+  $scope.reject = function () {
+
+  };
+
   $scope.circles = {};
   $scope.myCircle = {
     center: {
@@ -76,7 +90,14 @@ angular.module( 'Wisen.explore', [
   $scope.$on("mentorFound", function (event, config) {
     alert("YAY!!!");
     console.log(config);
-    $scope.sendRequestToMentor(config);
+    $scope.config = config;
+    $login.getRef().child("users").child(config.uid).child("displayName").once("value", function (name) {
+      $scope.searchResult.displayName = name.val();
+      $login.getRef().child("users"),child(config.uid).child("profileImageURL").once("value", function (url) {
+        $scope.searchResult.profileImageURL = url.val();
+        $scope.$digest();
+      });
+    });
   });
 
   $scope.$on("mentorNotFound", function (event) {
