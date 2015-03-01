@@ -117,7 +117,7 @@ angular.module("Wisen.userInfoTracking", [
                   $login.getRef().child("requests").child(requestID).update({status: 1});
                   alert("You accepted his/her request");
                   $state.go("connect");
-                  service.recipient = {recipientUID: request.menteeUID, recipientName: name};
+                  service.recipient = {recipientUID: request.menteeUID, recipientName: name.val()};
                 } else {
                   //reject
                   console.log("In disagree route");
@@ -140,7 +140,7 @@ angular.module("Wisen.userInfoTracking", [
               $login.getRef().child("users").child(request.mentorUID).child("displayName").once("value", function (name) {
                 alert("Wisen user "+name.val()+" accepts your request to learn #" + request.tag);
                 $state.go("connect");
-                service.recipient = {recipientUID: request.mentorUID, recipientName: name};
+                service.recipient = {recipientUID: request.mentorUID, recipientName: name.val()};
               }); 
             } else {
               //I'm down, reply that I have quited
