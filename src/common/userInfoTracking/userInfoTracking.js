@@ -105,14 +105,17 @@ angular.module("Wisen.userInfoTracking", [
               console.log("request with status 0 received");
               $login.getRef().child("users").child(request.menteeUID).child("displayName").once("value", function (name) {
                 var r = confirm("Wisen user "+name.val()+" wants you to teach him/her about #"+request.tag);
+                console.log(r);
                 if (r) {
                   //agree
+                  console.log("In agree route");
                   service.becomeActive(data); //not active to active
                   $login.getRef().child("requests").child(requestID).update({status: 1});
                   alert("You accepted his/her request");
                   $state.go("connect", {recipientUID: request.menteeUID, recipientName: name});
                 } else {
                   //reject
+                  console.log("In disagree route");
                   service.becomeInactive();
                   $login.getRef().child("requests").child(requestID).update({status: 3});
                 }
