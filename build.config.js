@@ -73,7 +73,9 @@ module.exports = {
       'bower_components/angularGeoFire/dist/angularGeoFire.min.js',
       'bower_components/sinch-rtc/sinch.min.js',
       'bower_components/lodash/dist/lodash.min.js',
-      'bower_components/angular-google-maps/dist/angular-google-maps.min.js'
+      'bower_components/angular-google-maps/dist/angular-google-maps.min.js',
+      'bower_components/jquery/dist/jquery.min.js',
+      'bower_components/angular-bootstrap/ui-bootstrap.min.js'
     ],
     css: [
         // '/bower_components/angular-ui-router/src/boilerplate.css'

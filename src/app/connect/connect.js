@@ -48,6 +48,7 @@ angular.module( 'Wisen.connect', [
   };
 
   var resolve = function () {
+    console.log("resolving");
     $sinch.getImageURL(function (url) {
       $scope.imageURL.receiver = url;
       $login.getImageURL(function (img) {
@@ -59,6 +60,7 @@ angular.module( 'Wisen.connect', [
   };
 
   $scope.$on("recipientRegistered", function (event, recipient) {
+    console.log("recipientRegistered event caught");
     $scope.sinchUsername.receiver = $sinch.getSinchUsername();
     $scope.sinchUsername.sender = $login.getSinchUsername();
     $scope.name.receiver = $sinch.getName();
@@ -67,6 +69,7 @@ angular.module( 'Wisen.connect', [
   });
 
   $scope.$on("senderReceiverResolved", function () {
+    console.log("senderReceiverResolved event caught");
     $sinch.startClient(function () {
       global_username = $login.getSinchUsername();
       $scope.ready = true;
@@ -77,6 +80,7 @@ angular.module( 'Wisen.connect', [
   });
 
   $scope.send = function () {
+    console.log("send!" + $scope.text);
     $sinch.sendMessage($scope.text, function (error) {
       console.log(error);
     });
@@ -88,6 +92,7 @@ angular.module( 'Wisen.connect', [
   });
 
   $sinch.onIncomingMessage(function (receivedInfo) {
+    console.log("Receive!!!");
     var message = {
       senderId: receivedInfo.senderId,
       recipientId: receivedInfo.recipientIds[1],
