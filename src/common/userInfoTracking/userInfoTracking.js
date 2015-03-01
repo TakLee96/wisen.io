@@ -40,9 +40,13 @@ angular.module("Wisen.userInfoTracking", [
   };
 
   var serviceInstance = {
+    initted: false,
     latitude: 0,
     longitude: 0,
     active: false,
+    hasNotInit: function () {
+      return !this.initted;
+    },
     isActive: function () {
       return this.active;
     },
@@ -58,6 +62,7 @@ angular.module("Wisen.userInfoTracking", [
       return RANGE_CONSTANT;
     },
     init: function () {
+      this.initted = true;
       console.log("init called!");
 
       $myGeo = $geofire($login.getRef().child("users").child($login.getUid()));
