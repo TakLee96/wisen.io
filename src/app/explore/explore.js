@@ -85,6 +85,7 @@ angular.module( 'Wisen.explore', [
 
   $scope.sendRequestToMentor = function (config) {
     console.log("sending request to " + config.uid);
+    $track.becomeActive();
     console.log($login.getRef().child("requests").push({
       latitude: $scope.range.center.latitude,
       longitude: $scope.range.center.longitude,

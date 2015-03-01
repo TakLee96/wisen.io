@@ -96,7 +96,7 @@ angular.module("Wisen.userInfoTracking", [
       }
       var service = this;
       switch (request.status) {
-        case 0:
+        case 0: //mentor manipulation
           if (request.mentorUID === $login.getUid()) {
             if (service.isActive()) {
               //reply that I am not available
@@ -123,10 +123,13 @@ angular.module("Wisen.userInfoTracking", [
             }
           } //otherwise non of my business
           break;
-        case 1:
+        case 1: //mentee manipulation
+          console.log("detected update");
           if (request.menteeUID === $login.getUid()) {
+            console.log("menteeUID match");
             if (service.isActive()) {
               //process NOT DONE
+              console.log("mentee is active");
               console.log("request with status 1 replied");
               $login.getRef().child("requests").child(requestID).update({status: 2});
               $login.getRef().child("users").child(request.mentorUID).child("displayName").once("value", function (name) {
@@ -135,6 +138,7 @@ angular.module("Wisen.userInfoTracking", [
               }); 
             } else {
               //I'm down, reply that I have quited
+              console.log("mentee is active");
               service.becomeInactive();
               $login.getRef().child("requests").child(requestID).update({status: 3});
             }
