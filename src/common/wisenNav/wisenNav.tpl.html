@@ -11,6 +11,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#"><img  alt="Brand" style="margin-top:2%;" src="assets/wisenLogoMini.gif"/></a>
+      <span class="navbar-text">WISEN.IO</span>
     </div>
     <div class="collapse navbar-collapse">
       <ul  style="margin-top:1%;" class="nav navbar-nav">
@@ -22,7 +23,7 @@
 
       <ul style="float:right;" stype="margin-top:-4px;">
           <span class="navbar-text">
-            Welcome, <span ng-bind="name || 'guest'" ></span>&#x21;
+            Welcome, <span ng-bind="name || 'guest'" >&nbsp;&nbsp;&nbsp;&nbsp; </span>&#x21;
             <button type="button" class="btn btn-default navbar-btn" ng-click="twitterLogin()" ng-show='!name'>Sign in</button>
             <button type="button" class="btn btn-primary navbar-btn" ng-click="logout()"/ ng-show="name"> Log out </button>
         </span>
