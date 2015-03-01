@@ -9,12 +9,12 @@
         <!-- <span ng-bind="searchResult"></span> -->
         <div class="mentorInfo" >
             <!-- <span ng-bind="mentor" value="{{mentor}}"></span> -->
-            <img ng-src="{{profileImageURL || 'assets/defaultProfile.png'}}" id="mentorBox" class="clearfix"/>
+            <img ng-src="{{searchResult.profileImageURL || 'assets/defaultProfile.png'}}" id="mentorBox" class="clearfix"/>
                 <p id="mentorText">
-                Name&#x3a; <span ng-bind="displayName"><span><br /><br />Common Interests&#x3a;<br /><br /><br />Do you want him&#x2f;her to be your mentor&#x3f;<br />
+                Name&#x3a; <span ng-bind="searchResult.displayName"><span><br /><br />Common Interests&#x3a;<br /><br /><br />Do you want him&#x2f;her to be your mentor&#x3f;<br />
                 </p>
-                <button type="button" class="btn btn-danger" ng-click="allow()" style="margin=10%;">Not really.</button>
-                <button type="button" class="btn btn-success" ng-click="reject()" style="margin=10%;">Yes!</button>
+                <button type="button" class="btn btn-danger" ng-click="reject()" style="margin=10%;">Not really.</button>
+                <button type="button" class="btn btn-success" ng-click="allow()" style="margin=10%;">Yes!</button>
         </div>
     </div>
 

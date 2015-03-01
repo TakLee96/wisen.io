@@ -43,7 +43,10 @@ angular.module( 'Wisen.explore', [
   };
 
   $scope.reject = function () {
-
+    $scope.searchResult = {
+      displayName: "",
+      profileImageURL: ""
+    };
   };
 
   $scope.circles = {};
