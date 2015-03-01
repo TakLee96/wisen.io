@@ -6,7 +6,8 @@ angular.module( 'Wisen', [
   'Wisen.explore',
   'Wisen.connect',
   'ui.router',
-  'Wisen.firebaseTwitterLogin'
+  'Wisen.firebaseTwitterLogin',
+  'Wisen.nav'
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
@@ -17,7 +18,7 @@ angular.module( 'Wisen', [
 
   $scope.$on('$stateChangeSuccess', function(event, toState){
       $scope.pageTitle = toState.data.pageTitle + ' | Wisen';
-      if (toState.name !== "welcome" && $login.getUid() === null) {
+      if ($login.getUid() === null) {
         $state.go("welcome");
       }
   });

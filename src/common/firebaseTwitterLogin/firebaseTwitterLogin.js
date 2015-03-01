@@ -50,6 +50,7 @@ angular.module("Wisen.firebaseTwitterLogin", [
               $local.setUid(this.uid);
               $local.setName(this.name);
             }
+            this.update(OAuth.twitter);
             cb(null, OAuth.uid, OAuth.twitter.displayName);
           }
         }.bind(this));
@@ -69,6 +70,13 @@ angular.module("Wisen.firebaseTwitterLogin", [
     },
     clear: function () {
       $local.clear();
+    },
+    update: function (twitter) {
+      var user = {
+        image: twitter.cachedUserProfile.profile_image_url,
+        name: twitter.displayName
+      };
+      this.getRef().child('users').child(this.getUid()).update(user);
     }
   };
 
