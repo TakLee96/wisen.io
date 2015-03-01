@@ -16,16 +16,28 @@
     margin-top: 3px;
 }
 
-.chatInfoBox {
-    border-bottom-width: 1px;
-    border-bottom-color: rgb(255, 255, 255);
-    border-bottom-style: solid;
+
+.chatInput {
+    float: left;
+    width: 70%;
+    background-color: rgb(124,142,159);
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
+    height: 5%;
+    margin-left: 15%;
+    margin-top: 5%;
 }
 
+.inputBar {
+    width: 100%;
+}
+
+.sendButton {
+    float: right;
+    width: 20%;
+}
 .chatInfo {
     width: 100%;
     background-color: rgb(230,230,230);
@@ -39,15 +51,15 @@
 }
 
 #chatBox2 {
-    float: none;
     height: 50px;
     margin-left: 10.60118%;
     margin-top: 0%;
     clear: none;
     width: 89.398821%;
-    border-bottom-width: 1px;
-    border-bottom-color: rgb(255, 255, 255);
-    border-bottom-style: solid;
+    border: 2px solid white;
+    float: left;
+    margin-top: 20px;
+    background-color: rgba(255,255,255,0.2);
 }
 
 #chatBox1 {
@@ -56,12 +68,12 @@
     margin-left: 0%;
     margin-top: 0px;
     clear: none;
-    width: 10.308158%;
+    width: 100%;
     border-top-left-radius: 32px;
     border-top-right-radius: 32px;
     border-bottom-right-radius: 32px;
     border-bottom-left-radius: 32px;
-    background-image:url("defaultProfile.png");
+    clip-path: inset(50px 50px 50px 50px);
     background-attachment: scroll;
     -webkit-background-size: cover;
     background-size: cover;
@@ -109,20 +121,4 @@
     color: rgb(255, 255, 255);
     margin-right: 0%;
     text-shadow: 2px 2px rgb(155,155,155);
-}
-
-#chatBox3 {
-    float: left;
-    height: auto;
-    margin-left: 0.00147406%;
-    margin-top: 70px;
-    clear: none;
-    width: 16.701061%;
-}
-
-
-
-.anchor {
-  border: 2px dashed DarkOrchid;
-  padding: 10px 10px 200px 10px;
 }

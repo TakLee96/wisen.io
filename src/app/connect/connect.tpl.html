@@ -1,42 +1,36 @@
 <div id="chatContainer" class="chatContainer clearfix" style="backgronud-color: rgb(43, 132, 222);">
-    <div id="chatInfoBox">
-        </br>
-        </br>
         <form>
-            <label style="color:rgb(124,142,159); margin-left:40%; margin-top: 5%;">Recipient
+            <!-- <label style="color:rgb(124,142,159); margin-left:40%; margin-top: 5%;">Recipient
                 <div ng-bind="sinchUsername.receiver" class="form-control"></div>
-            </label>
-            </br>
-            <label style="color:rgb(124,142,159); margin-left:40%;">Text 
-                <input type="text" ng-model="content" class="form-control" placeholder="Say hi to your him/her!"/>
-            </label>
-            </br>
-            <button class="btn btn-info" ng-click="send()" style="margin-left:50%; margin-top:10px;">Send</button>
+            </label> -->
+            <div class="chatInput clearfix">
+                <input type="text" ng-model="content" class="form-control inputBar" placeholder="Say hi to your mentor/mentee!"/>
+                <button class="btn btn-info sendButton" ng-click="send()">Send</button>
+            </div>
         </form>
-    </div>
-
+<!--
     <div>{{recipient}}</div>
     <div>{{imageURL}}</div>
     <div>{{name}}</div>
-    <div>{{sinchUsername}}</div>
+    <div>{{sinchUsername}}</div> -->
 
     <div ng-repeat="message in messages | orderBy: message.timestamp">
         <div id="chatBox" class="clearfix">
             <div id="chatBox1" class="clearfix">
                 <img ng-src="{{message.imageURL}}"/>
             </div>
-            <div id="chatBox2 chatBox3" class="clearfix">
+            <div id="chatBox2" class="clearfix">
                 <p id="chatText" style="margin-left:5px;">{{message.textBody}}</p>
             </div>
         </div>
-        <div id="chatBox3" class="clearfix">
+        <!-- <div id="chatBox3" class="clearfix">
             <p id="chatText">
                 Time sent&#x3a;
             </p>
             <p id="chatText1">
                 {{message.timestamp}}
             </p>
-        </div>
+        </div> -->
     </div>
 
 </div>
