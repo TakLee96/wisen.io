@@ -59,6 +59,8 @@ angular.module("Wisen.userInfoTracking", [
       return RANGE_CONSTANT;
     },
     init: function () {
+      console.log("CHECK THIS OUT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      console.log(this);
       this.initted = true;
 
       $myGeo = $geofire($login.getRef().child("users").child($login.getUid()));
@@ -76,10 +78,14 @@ angular.module("Wisen.userInfoTracking", [
       func();
       $interval(func, TRACT_PERIOD_CONSTANT);
 
-      $login.getRef().child("requests").orderByKey().on("child_added", this.update);
-      $login.getRef().child("requests").orderByKey().on("child_changed", this.update);
+      $login.getRef().child("requests").orderByKey().on("child_added", superUpdate.bind(this));
+      $login.getRef().child("requests").orderByKey().on("child_changed", superUpdate.bind(this));
     },
-    update: function (data) {
+    update: null,
+    data: null
+  };
+
+  function superUpdate (data) {
       console.log("update function called");
       console.log(this);
 
@@ -141,9 +147,7 @@ angular.module("Wisen.userInfoTracking", [
           console.log("SOME request with status: " + request.status);
           break;
       }
-    },
-    data: null
-  };
+    }
 
   return serviceInstance;
 })
