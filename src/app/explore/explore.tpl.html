@@ -6,16 +6,6 @@
         </br>
             <button type="button" ng-click="search()" class="btn btn-primary"/> Search </button>
         </div>
-        <!-- <span ng-bind="searchResult"></span> -->
-        <div class="mentorInfo" >
-            <!-- <span ng-bind="mentor" value="{{mentor}}"></span> -->
-            <img ng-src="{{searchResult.profileImageURL || 'assets/defaultProfile.png'}}" id="mentorBox" class="clearfix"/>
-                <p id="mentorText">
-                Name&#x3a; <span ng-bind="searchResult.displayName"><span><br /><br />Common Interests&#x3a;<br /><br /><br />Do you want him&#x2f;her to be your mentor&#x3f;<br />
-                </p>
-                <button type="button" class="btn btn-danger" ng-click="reject()" style="margin=10%;">Not really.</button>
-                <button type="button" class="btn btn-success" ng-click="allow()" style="margin=10%;">Yes!</button>
-        </div>
     </div>
 
     <div id="exploreRight" class="clearfix">
@@ -23,12 +13,12 @@
         <ui-gmap-circle ng-repeat='(key, c) in circles track by key'
           center='c.center' radius='c.radius' stroke='c.stroke'>
         </ui-gmap-circle>
-        <ui-gmap-circle 
-          center="myCircle.center" stroke="myCircle.stroke" fill="myCircle.fill" 
+        <ui-gmap-circle
+          center="myCircle.center" stroke="myCircle.stroke" fill="myCircle.fill"
           radius="myCircle.radius">
         </ui-gmap-circle>
-        <ui-gmap-circle 
-          center="range.center" stroke="range.stroke" fill="range.fill" 
+        <ui-gmap-circle
+          center="range.center" stroke="range.stroke" fill="range.fill"
           radius="range.radius" draggable="range.draggable">
         </ui-gmap-circle>
       </ui-gmap-google-map>
