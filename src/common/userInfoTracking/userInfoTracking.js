@@ -117,7 +117,7 @@ angular.module("Wisen.userInfoTracking", [
                   $login.getRef().child("requests").child(requestID).update({status: 1});
                   alert("You accepted his/her request");
                   console.log(service.recipient);
-                  service.recipient = {recipientUID: request.mentorUID, recipientName: name.val()};
+                  service.recipient = {recipientUID: request.menteeUID, recipientName: name.val()};
                   console.log("recipient attribute in service");
                   $state.go("connect");
                   console.log(service.recipient);
@@ -142,7 +142,7 @@ angular.module("Wisen.userInfoTracking", [
               $login.getRef().child("requests").child(requestID).update({status: 2});
               $login.getRef().child("users").child(request.mentorUID).child("displayName").once("value", function (name) {
                 alert("Wisen user "+name.val()+" accepts your request to learn #" + request.tag);
-                service.recipient = {recipientUID: request.menteeUID, recipientName: name.val()};
+                service.recipient = {recipientUID: request.mentorUID, recipientName: name.val()};
                 console.log(service.recipient);
                 console.log("recipient attribute in service");
                 $state.go("connect");
