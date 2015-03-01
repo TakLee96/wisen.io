@@ -5,7 +5,8 @@ angular.module( 'Wisen.explore', [
   'Wisen.firebaseTwitterLogin',
   'uiGmapgoogle-maps',
   'Wisen.brain',
-  'Wisen.userInfoTracking'
+  'Wisen.userInfoTracking',
+  'ui.bootstrap'
 ])
 
 
@@ -39,6 +40,18 @@ angular.module( 'Wisen.explore', [
       longitude: -122.4
     }
   };
+
+  $scope.myInterval = 5000;
+  var slides = $scope.slides = [
+    {image: "assets/biking.jpg", text: "Biking"},
+    {image: "assets/cook.jpg", text: "Cooking"},
+    {image: "assets/origami.jpg", text: "Origami"},
+    {image: "assets/run.jpg", text: "Running"},
+    {image: "assets/skateboard.jpg", text: "Skateboarding"},
+    {image: "assets/swim.jpg", text: "Swimming"}
+  ];
+
+
   //should be init when user location is ready
   $scope.range = {
     center: {
@@ -101,7 +114,7 @@ angular.module( 'Wisen.explore', [
       longitude: -122.4,
       latitude: 37.77
     },
-    zoom: 12
+    zoom: 10
   };
 
   $scope.$on("myLocationChange", function (event, location) {

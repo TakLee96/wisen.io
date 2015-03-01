@@ -17,5 +17,8 @@
     "restangular": "~1.4.0",
     "angular-google-maps": "~2.0.13",
     "angular-bootstrap": "~0.12.1"
+  },
+  "resolutions": {
+    "angular-bootstrap": "~0.12.1"
   }
 }
