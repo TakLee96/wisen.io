@@ -13,3 +13,8 @@ force:
 speed:
 	grunt build --force
 	npm start
+
+update:
+	git add -A
+	git commit -m "[Tak] Bug Fixing"
+	git push origin master
