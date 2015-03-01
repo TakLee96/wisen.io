@@ -18,7 +18,7 @@ angular.module( 'Wisen', [
 
   $scope.$on('$stateChangeSuccess', function(event, toState){
       $scope.pageTitle = toState.data.pageTitle + ' | Wisen';
-      if (toState.name !== "welcome" && $login.getUid() === null) {
+      if ($login.getUid() === null) {
         $state.go("welcome");
       }
   });

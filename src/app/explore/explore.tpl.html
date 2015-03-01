@@ -7,11 +7,11 @@
 
 <ui-gmap-google-map center='map.center' zoom='map.zoom'>
   <ui-gmap-circle ng-repeat='(key, c) in circles track by key'
-    center='c.loc' radius='c.radius' fill='c.fill'
-    stroke='c.stroke' clickable='c.clickable'>
+    center='c.center' radius='c.radius' fill='c.fill'
+    stroke='c.stroke' clickable='c.clickable' events="c.events">
   </ui-gmap-circle>
   <ui-gmap-circle
-    center='range.loc' radius='range.radius' fill='range.fill'
+    center='range.center' radius='range.radius' fill='range.fill'
     stroke='range.stroke' clickable='range.clickable'>
   </ui-gmap-circle>
 </ui-gmap-google-map>
