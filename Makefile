@@ -14,7 +14,12 @@ speed:
 	grunt build --force
 	npm start
 
-update:
+sync:
 	git add -A
 	git commit -m "[Tak] Bug Fixing"
 	git push origin master
+
+javac:
+	grunt build --force
+	cp -r bower_components/bootstrap/fonts build/fonts
+	npm start

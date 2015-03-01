@@ -1,34 +1,18 @@
 <div id="chatContainer" class="chatContainer clearfix" style="backgronud-color: rgb(43, 132, 222);">
         <form>
-            <!-- <label style="color:rgb(124,142,159); margin-left:40%; margin-top: 5%;">Recipient
-                <div ng-bind="sinchUsername.receiver" class="form-control"></div>
-            </label> -->
             <div class="chatInput clearfix">
                 <textarea type="text" ng-model="content" class="form-control inputBar" placeholder="Say hi to your mentor/mentee!"/>
             </textarea>
                 <button class="btn btn-info sendButton" ng-click="send()">Send</button>
             </div>
         </form>
-<!--
-    <div>{{recipient}}</div>
-    <div>{{imageURL}}</div>
-    <div>{{name}}</div>
-    <div>{{sinchUsername}}</div> -->
 
     <div ng-repeat="message in messages | orderBy: message.timestamp"
-        id="chatBox" class="clearfix">
+        id="chatBox" class="clearfix row">
             <div id="chatBox1 chatBox2" class="clearfix">
-                <img ng-src="{{message.imageURL}}"/>
-                <p id="chatText">{{message.textBody}}</p>
+                <img ng-src="{{message.imageURL}}" class="col-md-1"/>
+                <p id="chatText" class="col-md-9" style="padding: 9px; 1px solid white;">{{message.textBody}}</p>
             </div>
         </div>
-        <!-- <div id="chatBox3" class="clearfix">
-            <p id="chatText">
-                Time sent&#x3a;
-            </p>
-            <p id="chatText1">
-                {{message.timestamp}}
-            </p>
-        </div> -->
 
 </div>
