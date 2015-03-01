@@ -19,7 +19,7 @@ sync:
 	git commit -m "[Tak] Bug Fixing"
 	git push origin master
 
-javac:
+compile it:
 	grunt build --force
 	cp -r bower_components/bootstrap/fonts build/fonts
 	npm start
