@@ -89,6 +89,7 @@ angular.module( 'Wisen.explore', [
   $scope.$on("mentorFound", function (event, config) {
     alert("Match Found!");
     console.log(config);
+    $scope.sendRequestToMentor(config);
   });
 
   $scope.$on("mentorNotFound", function (event) {
