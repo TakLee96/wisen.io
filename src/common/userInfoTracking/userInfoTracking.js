@@ -64,7 +64,7 @@ angular.module("Wisen.userInfoTracking", [
       return this.recipient;
     },
     hasNotLogIn: function () {
-      return this.loggedin;
+      return !this.loggedin;
     },
     init: function () {
       console.log("CHECK THIS OUT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
