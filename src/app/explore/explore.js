@@ -92,7 +92,7 @@ angular.module( 'Wisen.explore', [
       mentorUID: config.uid,
       radius: RANGE_CONSTANT,
       status: 0,
-      tag: config.tag
+      tag: config.tag.toLowerCase()
     }).key());
   };
 
@@ -131,6 +131,8 @@ angular.module( 'Wisen.explore', [
       };
       $scope.map.center.longitude = location.longitude;
       $scope.map.center.latitude = location.latitude;
+      $scope.range.center.longitude = location.longitude;
+      $scope.range.center.latitude = location.latitude;
       //could change focus of map
     }
     $scope.$digest();

@@ -80,6 +80,9 @@ angular.module("Wisen.userInfoTracking", [
       $login.getRef().child("requests").orderByKey().on("child_changed", this.update);
     },
     update: function (data) {
+      console.log("update function called");
+      console.log(this);
+
       var request = data.val();
       var requestID = data.key();
       if (request === null) {
