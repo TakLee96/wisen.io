@@ -90,7 +90,10 @@ module.exports = {
         'src/assets/biking.jpg',
         'src/assets/skateboard.jpg',
         'src/assets/cook.jpg',
-        'src/assets/cubes.gif'
+        'src/assets/cubes.gif',
+        'src/assets/skills.gif',
+        'src/assets/community.gif',
+        'src/assets/matchUp.gif'
     ]
   },
 };
