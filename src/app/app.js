@@ -25,9 +25,13 @@ angular.module( 'Wisen', [
               alert("This page is unavailable to you right now. Please log in using Twitter first!");
           }
           $state.go("welcome");
-      } else if (toState.name === "connect") {
-        $sinch.registerRecipient(toParams);
-      } else if ($track.hasNotInit()) {
+      }
+      if (toState.name === "connect") {
+        if (toParams) {
+          $sinch.registerRecipient(toParams);
+        }
+      }
+      if ($track.hasNotInit()) {
         $track.init();
       }
   });

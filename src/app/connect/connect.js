@@ -9,6 +9,10 @@ angular.module( 'Wisen.connect', [
  * will handle ensuring they are all available at run-time, but splitting it
  * this way makes each module more "self-contained".
  */
+.run(function($anchorScroll) {
+  $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
+})
+
 .config(["$stateProvider", function config( $stateProvider ) {
   $stateProvider.state( 'connect', {
     url: '/connect',
@@ -85,9 +89,3 @@ angular.module( 'Wisen.connect', [
 
 ;
 
-
-
-angular.module('Wisen.connect', [])
-.run(['$anchorScroll', function($anchorScroll) {
-  $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
-}]);
