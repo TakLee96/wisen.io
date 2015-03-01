@@ -3,9 +3,9 @@ angular.module("Wisen.nav", [
   "ui.router"
 ])
 
-.controller("navCtrl", function ($scope, $login) {
+.controller("navCtrl", function ($scope, $login, $rootScope) {
 
-  $scope.name = $login.getName();
+  $rootScope.name = $login.getName();
 
   $scope.logout = function () {
     $login.clear();

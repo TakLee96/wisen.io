@@ -32,6 +32,7 @@ angular.module( 'Wisen.welcome', [
         console.log("Login Failed!", error);
       } else {
         console.log("Login Successful:", uid);
+        $rootScope.name = $login.getName();
         $state.go("settings");
       }
     });

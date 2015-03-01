@@ -130,10 +130,8 @@ angular.module( 'Wisen.explore', [
       },
       clickable: true,
       events: {
-        click: function (circle, event, model, args) {
-          console.log(circle);
-          console.log("selected");
-          $scope.handleClick(circle.key);
+        click: function () {
+          $scope.sendRequestToMentor(key);
         }
       }
     };
