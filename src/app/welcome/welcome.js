@@ -24,12 +24,12 @@ angular.module( 'Wisen.welcome', [
 .controller( 'WelcomeCtrl', function ($scope, $login, $state, $rootScope, $track) {
 
   $rootScope.twitterLogin = function () {
-    $login.login(function (error, uid) {
+    $login.login(function (error, uid, name) {
       if (error) {
         console.log("Login Failed!", error);
       } else {
         console.log("Login Successful:", uid);
-        $rootScope.name = $login.getName();
+        $rootScope.name = name;
         $track.init();
         $state.go("settings");
       }

@@ -31,16 +31,6 @@ angular.module( 'Wisen.settings', [
   var userObj = $login.getRef().child("users").child($login.getUid());
   var $geo = $geofire($login.getRef().child("userLocations"));
 
-  $scope.locationAlert = {
-    type: "warning",
-    msg: "retrieving location..."
-  };
-
-  var id = setTimeout(function () {
-    $scope.locationAlert.type = "danger";
-    $scope.locationAlert.msg = "retrieving is slow...";
-  }, 5000);
-
   $scope.name = $login.getName();
 
   userObj.on("value", function (user) {

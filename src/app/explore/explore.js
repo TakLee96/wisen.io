@@ -4,7 +4,8 @@ angular.module( 'Wisen.explore', [
   'angularGeoFire',
   'Wisen.firebaseTwitterLogin',
   'uiGmapgoogle-maps',
-  'Wisen.brain'
+  'Wisen.brain',
+  'Wisen.userInfoTracking'
 ])
 
 
@@ -25,12 +26,20 @@ angular.module( 'Wisen.explore', [
 /**
  * And of course we define a controller for our route.
  */
-.controller('ExploreCtrl', function ($scope, $geofire, $login, $brain) {
+.controller('ExploreCtrl', function ($scope, $geofire, $login, $brain, $track) {
 
-  var RANGE_CONSTANT = 10;
+  var RANGE_CONSTANT = $track.getRangeConstant();
 
   var $geo = $geofire($login.getRef().child("userLocations"));
+  
   $scope.circles = {};
+  $scope.myCircle = {
+    center: {
+      latitude: 37.77,
+      longitude: -122.4
+    }
+  };
+  //should be init when user location is ready
   $scope.range = {
     center: {
       longitude: -122.4,
@@ -38,15 +47,15 @@ angular.module( 'Wisen.explore', [
     },
     radius: RANGE_CONSTANT*1000,
     fill: {
-      color: "$B2089B",
-      opacity: 0.2
+      color: "#08B21F",
+      opacity: 0.5
     },
     stroke: {
-      color: "$B2089B",
-      weight: 2,
+      color: "#000000",
+      weight: 3,
       opacity: 1
     },
-    clickable: false
+    draggable: true
   };
 
   $scope.search = function () {
@@ -80,7 +89,7 @@ angular.module( 'Wisen.explore', [
 
   $scope.sendRequestToMentor = function (config) {
     console.log("sending request to " + config.uid);
-    $login.getRef().child("requests").push({
+    console.log($login.getRef().child("requests").push({
       latitude: $scope.range.center.latitude,
       longitude: $scope.range.center.latitude,
       menteeUID: $login.getUid(),
@@ -88,21 +97,36 @@ angular.module( 'Wisen.explore', [
       radius: RANGE_CONSTANT,
       status: 0,
       tag: config.tag
-    });
+    }).key());
   };
 
-  $geo.$get($login.getUid())
-    .then(function (location) {
-      if (location) {
-        $scope.map.center.latitude = location[0];
-        $scope.map.center.longitude = location[1];
-        $scope.range.center.latitude = location[0];
-        $scope.range.center.longitude = location[1];
-        $scope.$emit("locationRetrieved");
-      } else {
-        console.log("FUCKED! NullLocationError!");
-      }
-    });
+  $scope.$on("myLocationChange", function (event, location) {
+    if ($scope.myCircle) {
+      $scope.myCircle.center.latitude = location.latitude;
+      $scope.myCircle.center.longitude = location.longitude;
+    } else {
+      console.log("Contructing my circle for the first time");
+      $scope.myCircle = {
+        center: {
+          latitude: location.latitude,
+          longitude: location.longitude
+        },
+        radius: 100,
+        stroke: {
+          color: '#000000',
+          weight: 1,
+          opacity: 1
+        },
+        fill: {
+          color: "#443EF3",
+          opacity: 0.5
+        },
+        geodesic: true
+      };
+      //could change focus of map
+    }
+    $scope.$digest();
+  });
 
   $scope.map = {
     center: {
@@ -112,35 +136,30 @@ angular.module( 'Wisen.explore', [
     zoom: 12
   };
 
-  $scope.$on("locationRetrieved", function () {
-    $geo.$query({
-      center: [$scope.map.center.latitude, $scope.map.center.longitude],
-      radius: 20
-    }).on("key_entered", "pushNewLocation");
-  });
-
-  $scope.$on("pushNewLocation", function (event, key, location, distance) {
-    $scope.circles[key] = {
-      key: key,
-      distance: distance,
-      center: {
-        latitude: location[0],
-        longitude: location[1]
-      },
-      radius: 100,
-      stroke: {
-        color: '$08B21F',
-        weight: 2,
-        opacity: 1
-      },
-      fill: {
-        color: '#08B21F',
-        opacity: 0.5
-      },
-      clickable: true,
-      draggable: true,
-      geodesic: true
-    };
+  $scope.$on("multipleLocationChange", function (event, key, location, distance) {
+    if (key !== $login.getUid()) {
+      if (!$scope.circles[key]) {
+        $scope.circles[key] = {
+          key: key,
+          distance: distance,
+          center: {
+            latitude: location[0],
+            longitude: location[1]
+          },
+          radius: 100,
+          stroke: {
+            color: '#000000',
+            weight: 1,
+            opacity: 1
+          },
+          geodesic: true
+        };
+      } else {
+        $scope.circles[key].latitude = location[0];
+        $scope.circles[key].longitude = location[1];
+      }
+      $scope.$digest();
+    }
   });
 
 })
