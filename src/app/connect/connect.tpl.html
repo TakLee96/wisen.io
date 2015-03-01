@@ -23,7 +23,7 @@
     <div ng-repeat="message in messages | orderBy: message.timestamp">
         <div id="chatBox" class="clearfix">
             <div id="chatBox1" class="clearfix">
-                <img ng-src="message.imageURL"/>
+                <img ng-src="{{message.imageURL}}"/>
             </div>
             <div id="chatBox2 chatBox3" class="clearfix">
                 <p id="chatText" style="margin-left:5px;">{{message.textBody}}</p>
