@@ -16,6 +16,6 @@
     "sinch-rtc": "~1.2.0",
     "restangular": "~1.4.0",
     "angular-google-maps": "~2.0.13",
-    "bootstrap": "~3.3.2"
+    "angular-bootstrap": "~0.12.1"
   }
 }
