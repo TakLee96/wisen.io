@@ -58,7 +58,7 @@ angular.module( 'Wisen.connect', [
       $scope.imageURL.receiver = img;
       $login.getImageURL(function (image) {
         console.log("Image2 Processed");
-        $scope.imageURL.sender = img;
+        $scope.imageURL.sender = image;
         $sinch.startClient(function () {
           console.log("Client Started!");
           global_username = $login.getSinchUsername();
