@@ -3,7 +3,7 @@ angular.module("Wisen.userInfoTracking", [
   'angularGeoFire'
 ])
 
-.factory("$track", function ($login, $rootScope, $interval, $state, $geofire) {
+.factory("$track", function ($login, $interval, $state, $geofire) {
 
   var TRACT_PERIOD_CONSTANT = 20 * 1000;
   var RANGE_CONSTANT = 10;
@@ -42,7 +42,6 @@ angular.module("Wisen.userInfoTracking", [
     longitude: 0,
     active: false,
     recipient: null,
-    loggedin: false,
     hasNotInit: function () {
       return !this.initted;
     },
@@ -62,9 +61,6 @@ angular.module("Wisen.userInfoTracking", [
     },
     getRecipient: function () {
       return this.recipient;
-    },
-    hasNotLogIn: function () {
-      return !this.loggedin;
     },
     init: function () {
       console.log("CHECK THIS OUT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -94,6 +90,7 @@ angular.module("Wisen.userInfoTracking", [
 
   function superUpdate (data) {
       console.log("update function called");
+      console.log("logging this out:");
       console.log(this);
 
       var request = data.val();
@@ -119,11 +116,11 @@ angular.module("Wisen.userInfoTracking", [
                   service.becomeActive(data); //not active to active
                   $login.getRef().child("requests").child(requestID).update({status: 1});
                   alert("You accepted his/her request");
+                  console.log(service.recipient);
+                  service.recipient = {recipientUID: request.menteeUID, recipientName: name.val()};
+                  console.log("recipient attribute in service");
                   $state.go("connect");
-                  $rootScope.recipient = {recipientUID: request.menteeUID, recipientName: name.val()};
-                  $rootScope.$emit("Event");
-                  console.log($rootScope.recipient);
-                  console.log("rootScope!!!!! STEP 0");
+                  console.log(service.recipient);
                 } else {
                   //reject
                   console.log("In disagree route");
@@ -145,11 +142,11 @@ angular.module("Wisen.userInfoTracking", [
               $login.getRef().child("requests").child(requestID).update({status: 2});
               $login.getRef().child("users").child(request.mentorUID).child("displayName").once("value", function (name) {
                 alert("Wisen user "+name.val()+" accepts your request to learn #" + request.tag);
+                service.recipient = {recipientUID: request.menteeUID, recipientName: name.val()};
+                console.log(service.recipient);
+                console.log("recipient attribute in service");
                 $state.go("connect");
-                $rootScope.recipient = {recipientUID: request.mentorUID, recipientName: name.val()};
-                $rootScope.$emit("Event");
-                console.log($rootScope.recipient);
-                console.log("rootScope!!!!! STEP 1");
+                console.log(service.recipient);
               }); 
             } else {
               //I'm down, reply that I have quited

@@ -26,9 +26,7 @@ angular.module( 'Wisen.connect', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'ConnectCtrl', function ($scope, $sinch, $login, $track, $rootScope) { 
-
-  $rootScope.$digest();
+.controller( 'ConnectCtrl', function ($scope, $sinch, $login, $track) { 
 
   $scope.messages = [];
   $scope.content = "";
@@ -49,18 +47,20 @@ angular.module( 'Wisen.connect', [
     receiver: ""
   };
 
-  $rootScope.$on("Event", function () {
-    console.log("Event!");
-    $since.registerRecipient($rootScope.recipient);
-    $scope.sinchUsername.receiver = $rootScope.recipientUID.slice(8);
+  var launch = function () {
+    console.log("Launch!");
+    $scope.sinchUsername.receiver = $sinch.getSinchUsername();
     $scope.sinchUsername.sender = $login.getSinchUsername();
-    $scope.name.receiver = $rootScope.recipientName;
+    $scope.name.receiver = $sinch.getName();
     $scope.name.sender = $login.getName();
     $sinch.getImageURL(function (img) {
+      console.log("Image1 Processed");
       $scope.imageURL.receiver = img;
       $login.getImageURL(function (image) {
+        console.log("Image2 Processed");
         $scope.imageURL.sender = img;
         $since.startClient(function () {
+          console.log("Client Started!");
           global_username = $login.getSinchUsername();
           $scope.$digest();
         }, function (error) {
@@ -68,7 +68,7 @@ angular.module( 'Wisen.connect', [
         });
       });
     });  
-  });
+  };
 
   $scope.send = function () {
     console.log("send!" + $scope.content);
@@ -98,6 +98,8 @@ angular.module( 'Wisen.connect', [
     }
     $scope.$digest();
   });
+
+  launch();
 
 })
 
