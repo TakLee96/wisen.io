@@ -26,7 +26,7 @@ angular.module( 'Wisen.connect', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'ConnectCtrl', function ($scope, $sinch, $login) {
+.controller( 'ConnectCtrl', function ($scope, $sinch, $login, $rootScope) {
 
   $scope.messages = [];
   $scope.text = "";
@@ -53,13 +53,13 @@ angular.module( 'Wisen.connect', [
       $scope.imageURL.receiver = url;
       $login.getImageURL(function (img) {
         $scope.imageURL.sender = img;
-        $scope.$broadcast("senderReceiverResolved");
+        $scope.$emit("senderReceiverResolved");
         $scope.$digest();
       });
     });
   };
 
-  $scope.$on("recipientRegistered", function (event, recipient) {
+  $rootScope.$on("recipientRegistered", function (event, recipient) {
     console.log("recipientRegistered event caught");
     console.log(recipient);
     $scope.sinchUsername.receiver = $sinch.getSinchUsername();

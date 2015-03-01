@@ -77,7 +77,7 @@ angular.module("Wisen.sinchClient", [
       console.log(recipient);
       this.recipientUID = recipient.recipientUID;
       this.recipientName = recipient.recipientName;
-      $rootScope.$broadcast("recipientRegistered", recipient); 
+      $rootScope.$emit("recipientRegistered", recipient); 
     },
     getImageURL: function (cb) {
       $login.getRef().child("users").child(this.recipientUID).child("profileImageURL").once("value", function (img) {
