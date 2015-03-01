@@ -41,6 +41,7 @@ angular.module("Wisen.userInfoTracking", [
     latitude: 0,
     longitude: 0,
     active: false,
+    recipient: {},
     hasNotInit: function () {
       return !this.initted;
     },
@@ -57,6 +58,9 @@ angular.module("Wisen.userInfoTracking", [
     },
     getRangeConstant: function () {
       return RANGE_CONSTANT;
+    },
+    getRecipient: function () {
+      return this.recipient;
     },
     init: function () {
       console.log("CHECK THIS OUT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -112,7 +116,8 @@ angular.module("Wisen.userInfoTracking", [
                   service.becomeActive(data); //not active to active
                   $login.getRef().child("requests").child(requestID).update({status: 1});
                   alert("You accepted his/her request");
-                  $state.go("connect", {recipientUID: request.menteeUID, recipientName: name});
+                  $state.go("connect");
+                  service.recipient = {recipientUID: request.menteeUID, recipientName: name};
                 } else {
                   //reject
                   console.log("In disagree route");
@@ -134,7 +139,8 @@ angular.module("Wisen.userInfoTracking", [
               $login.getRef().child("requests").child(requestID).update({status: 2});
               $login.getRef().child("users").child(request.mentorUID).child("displayName").once("value", function (name) {
                 alert("Wisen user "+name.val()+" accepts your request to learn #" + request.tag);
-                $state.go("connect", {recipientUID: request.mentorUID, recipientName: name});
+                $state.go("connect");
+                service.recipient = {recipientUID: request.mentorUID, recipientName: name};
               }); 
             } else {
               //I'm down, reply that I have quited

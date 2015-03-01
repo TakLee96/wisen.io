@@ -27,11 +27,7 @@ angular.module( 'Wisen', [
           $state.go("welcome");
       }
       if (toState.name === "connect") {
-        console.log(toState);
-        console.log(toParams);
-        console.log(fromState);
-        console.log(fromParams);
-        $sinch.registerRecipient();
+        $sinch.registerRecipient($track.getRecipient());
       }
       if ($track.hasNotInit()) {
         $track.init();
