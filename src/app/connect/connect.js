@@ -29,7 +29,7 @@ angular.module( 'Wisen.connect', [
 
   $scope.messages = [];
   $scope.text = "";
-  $scope.sendReceiverResolved = false;
+  $scope.ready = false;
 
   $scope.imageURL = {
     sender: null,
@@ -41,21 +41,38 @@ angular.module( 'Wisen.connect', [
     receiver: null
   };
 
-  $sinch.getImageURL(function (url) {
-    $scope.imageURL.receiver = url;
-    $scope.name.receiver = $sinch.getName();
-    $login.getImageURL(function (img) {
-      $scope.imageURL.sender = img;
-      $scope.name.sender = $login.getName();
-      $scope.sendReceiverResolved = true;
-      $scope.$digest();
+  $scope.sinchUsername = {
+    sender: null,
+    receiver: null
+  };
+
+  var resolve = function () {
+    $sinch.getImageURL(function (url) {
+      $scope.imageURL.receiver = url;
+      $login.getImageURL(function (img) {
+        $scope.imageURL.sender = img;
+        $scope.$broadcast("senderReceiverResolved");
+        $scope.$digest();
+      });
     });
+  };
+
+  $scope.$on("recipientRegistered", function (event, recipient) {
+    $scope.sinchUsername.receiver = $sinch.getSinchUsername();
+    $scope.sinchUsername.sender = $login.getSinchUsername();
+    $scope.name.receiver = $sinch.getName();
+    $scope.name.sender = $login.getName();
+    resolve();
   });
 
-  $sinch.startClient(function () {
-    global_username = $login.getSinchUsername();
-  }, function (error) {
-    console.log(error);
+  $scope.$on("senderReceiverResolved", function () {
+    $sinch.startClient(function () {
+      global_username = $login.getSinchUsername();
+      $scope.ready = true;
+      $scope.$digest();
+    }, function (error) {
+      console.log(error);
+    });
   });
 
   $scope.send = function () {

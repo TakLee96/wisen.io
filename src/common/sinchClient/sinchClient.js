@@ -13,7 +13,7 @@ angular.module("Wisen.sinchClient", [
   };
 })
 //b063ab0f-bfbc-4a6a-b191-401d579cb8cf
-.factory("$sinch", function ($login, $constant) {
+.factory("$sinch", function ($login, $constant, $rootScope) {
 
   var sinchClient = new SinchClient({
     applicationKey: $constant.getApplicationKey(),
@@ -47,7 +47,7 @@ angular.module("Wisen.sinchClient", [
     },
     sendMessage: function (text, errorHandler) {
       this.getMessageClient()
-        .send(this.getMessageClient().newMessage(this.getRecipientID(), text))
+        .send(this.getMessageClient().newMessage(this.getSinchUsername(), text))
         .fail(errorHandler);
     },
     onIncomingMessage: function (handler) {
@@ -61,8 +61,11 @@ angular.module("Wisen.sinchClient", [
       });
     },
     registerRecipient: function (recipient) {
+      console.log("Registering Recipient");
+      console.log(recipient);
       this.recipientUID = recipient.recipientUID;
-      this.recipientName = recipient.recipientName;   
+      this.recipientName = recipient.recipientName;
+      $rootScope.$broadcast("recipientRegistered", recipient); 
     },
     getImageURL: function (cb) {
       $login.getRef().child("users").child(this.recipientUID).child("profileImageURL").once("value", function (img) {
@@ -73,6 +76,9 @@ angular.module("Wisen.sinchClient", [
     recipientName: null,
     getName: function () {
       return this.recipientName;
+    },
+    getSinchUsername: function () {
+      return this.recipientUID.slice(8);
     }
   };
 
