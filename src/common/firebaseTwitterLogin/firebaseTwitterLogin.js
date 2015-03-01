@@ -74,7 +74,8 @@ angular.module("Wisen.firebaseTwitterLogin", [
     update: function (twitter) {
       var user = {
         profileImageURL: twitter.cachedUserProfile.profile_image_url,
-        displayName: twitter.displayName
+        displayName: twitter.displayName,
+        username: twitter.username
       };
       this.getRef().child('users').child(this.getUid()).update(user);
     },
