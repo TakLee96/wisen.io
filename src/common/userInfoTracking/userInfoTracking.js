@@ -12,12 +12,12 @@ angular.module("Wisen.userInfoTracking", [
     } else {
       alert("No Location Service!!!");
     }
-  }
+  };
 
   var serviceInstance = {
     latitude: 0,
     longitude: 0,
-    isActive: false,
+    active: false,
     init: function () {
       $interval(function () {
         getGeolocation(function (position) {
@@ -36,14 +36,14 @@ angular.module("Wisen.userInfoTracking", [
       return this.longitude;
     },
     isActive: function () {
-      return this.isActive;
+      return this.active;
     },
     becomeActive: function (data) {
-      this.isActive = true;
+      this.active = true;
       this.data = data;
     },
     becomeInactive: function () {
-      this.isActive = false;
+      this.active = false;
       this.data = null;
     },
     update: function (data) {
@@ -73,7 +73,7 @@ angular.module("Wisen.userInfoTracking", [
                   this.becomeInactive();
                   $login.getRef().child("requests").child(requestID).update({status: 3});
                 }
-              })
+              });
             }
           } //otherwise non of my business
           break;
@@ -99,7 +99,7 @@ angular.module("Wisen.userInfoTracking", [
             this.becomeInactive();
           }
           break;
-        case default:
+        default:
           console.log("SOME request with status: " + request.status);
           break;
       }
