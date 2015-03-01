@@ -49,7 +49,7 @@ angular.module( 'Wisen.connect', [
     console.log(deliveryInfo);
   });
 
-  $sinch.onIncomingMessage(function (receivedInfo) {    
+  $sinch.onIncomingMessage(function (receivedInfo) {
     var message = {
       senderId: receivedInfo.senderId,
       recipientId: receivedInfo.recipientIds[1],
@@ -67,4 +67,3 @@ angular.module( 'Wisen.connect', [
 })
 
 ;
-

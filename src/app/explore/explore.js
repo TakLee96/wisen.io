@@ -7,6 +7,7 @@ angular.module( 'Wisen.explore', [
   'Wisen.brain'
 ])
 
+
 /**
  * Each section or module of the site can also have its own routes. AngularJS
  * will handle ensuring they are all available at run-time, but splitting it
@@ -140,4 +141,3 @@ angular.module( 'Wisen.explore', [
 })
 
 ;
-

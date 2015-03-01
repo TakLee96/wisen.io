@@ -1,169 +1,194 @@
-.Box {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 870px;
-  height: 800px;
-  z-index: 57;
-}
-.SEND {
-  font-size: 11px;
-  font-family: "Arial";
-  color: rgb(179, 179, 179);
-  font-weight: bold;
-  line-height: 1.273;
-  text-align: left;
-  position: absolute;
-  left: 633px;
-  top: 632.999px;
-  z-index: 56;
-}
-.Layer_1_copy_2 {
-  background-image: url("Layer 1 copy 2.png");
-  position: absolute;
-  left: 164px;
-  top: 607px;
-  width: 72px;
-  height: 68px;
-  z-index: 55;
-}
-.Rounded_Rectangle_1_copy_4 {
-  border-style: solid;
-  border-width: 3px;
-  border-color: rgb(0, 0, 0);
-  border-radius: 50%;
-  background-color: rgb(255, 255, 255);
-  opacity: 0.14;
-  box-shadow: inset 0.5px 0.866px 0px 0px rgba(255, 255, 255, 0.01);
-  position: absolute;
-  left: 171px;
-  top: 610px;
-  width: 52px;
-  height: 52px;
-  z-index: 54;
-}
-.Rounded_Rectangle_1_copy_3 {
-  border-style: solid;
-  border-width: 3px;
-  border-color: rgb(0, 0, 0);
-  border-radius: 50%;
-  background-color: rgb(255, 255, 255);
-  opacity: 0.14;
-  box-shadow: inset 0.5px 0.866px 0px 0px rgba(255, 255, 255, 0.01);
-  position: absolute;
-  left: 619px;
-  top: 610px;
-  width: 52px;
-  height: 52px;
-  z-index: 53;
-}
-.Chocolate_bar_jelly_o_sesame_snaps_carrot_cake_ {
-  font-size: 11px;
-  font-family: "Arial";
-  color: rgb(179, 179, 179);
-  line-height: 1.273;
-  text-align: left;
-  position: absolute;
-  left: 248px;
-  top: 630.56px;
-  width: 344px;
-  height: 38px;
-  z-index: 52;
-}
-.Shape_15 {
-  border-style: solid;
-  border-width: 3px;
-  border-color: rgb(0, 0, 0);
-  background-color: rgb(255, 255, 255);
-  opacity: 0.48;
-  box-shadow: inset 0px 0px 4.27px 2.73px rgba(0, 0, 0, 0.47);
-  position: absolute;
-  left: 149px;
-  top: 590px;
-  width: 541px;
-  height: 93px;
-  z-index: 51;
-}
-.Shape_8 {
-  background-image: -moz-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(255,255,255) 100%);
-  background-image: -webkit-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(255,255,255) 100%);
-  background-image: -ms-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(255,255,255) 100%);
-  opacity: 0.329;
-  box-shadow: 0px 0px 2px 0px rgba(64, 42, 42, 0.39);
-  position: absolute;
-  left: 130px;
-  top: 574px;
-  width: 584px;
-  height: 132px;
-  z-index: 50;
+.chatContainer {
+    height: auto;
+    min-height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    background-color: rgba(43, 132, 222, 0.5);
+    background-image: url("chagBg.jpg");
+    background-attachment: scroll;
+    -webkit-background-size: cover;
+    background-size: cover;
+    border-top-width: 0px;
+    background-repeat: repeat repeat;
+    position: absolute;
+	z-index: -1;
+    opacity:0.8;
+    margin-top: 3px;
 }
 
-/*---------------below is message div of the person user is chatting with.---------------*/
-.friendMsgBar {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 870px;
-  height: 800px;
-  z-index: 10;
+.chatInfoBox {
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(255, 255, 255);
+    border-bottom-style: solid;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
-.friendName {
-  font-size: 10px;
-  font-family: "Myriad Pro";
-  color: rgb(255, 255, 255);
-  line-height: 1.4;
-  position: absolute;
-  left: 249.036px;
-  top: 476.5px;
-  z-index: 9;
+
+.chatInfo {
+    width: 100%;
+    background-color: rgb(230,230,230);
 }
-.friendMsg {
-  font-size: 12px;
-  font-family: "Myriad Pro";
-  color: rgb(255, 255, 255);
-  line-height: 1.167;
-  text-align: left;
-  text-shadow: 0.707px 0.707px 0px rgba(0, 0, 0, 0.24);
-  position: absolute;
-  left: 249.937px;
-  top: 507.992px;
-  width: 340px;
-  height: 27px;
-  z-index: 8;
+
+.chatInfo:hover{
+    background-color: rgb(240,240,240);
 }
-.friendPic {
-  background-image: url("Layer 2 copy.png");
-  position: absolute;
-  left: 611px;
-  top: 432px;
-  width: 98px;
-  height: 98px;
-  z-index: 7;
+.chatInfo:active{
+    background-color: rgb(200,200,200);
 }
-.friendProfile {
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgb(0, 0, 0);
-  border-radius: 50%;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0.5px 0.866px 5px 0px rgba(0, 0, 0, 0.75), inset 0.5px 0.866px 0px 0px rgba(255, 255, 255, 0.01);
-  position: absolute;
-  left: 616px;
-  top: 437px;
-  width: 86px;
-  height: 86px;
-  z-index: 6;
+
+#chatBox2 {
+    float: none;
+    height: 50px;
+    margin-left: 10.60118%;
+    margin-top: 0%;
+    clear: none;
+    width: 89.398821%;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(255, 255, 255);
+    border-bottom-style: solid;
 }
-.friendChatBg {
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.69);
-  box-shadow: 0.5px 0.866px 5px 0px rgba(0, 0, 0, 0.75), inset 0.5px 0.866px 0px 0px rgba(255, 255, 255, 0.01);
-  position: absolute;
-  left: 217px;
-  top: 458px;
-  width: 485px;
-  height: 83px;
-  z-index: 5;
+
+#chatBox1 {
+    float: left;
+    height: 50px;
+    margin-left: 0%;
+    margin-top: 0px;
+    clear: none;
+    width: 10.308158%;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    border-bottom-right-radius: 32px;
+    border-bottom-left-radius: 32px;
+    background-image:url("defaultProfile.png");
+    background-attachment: scroll;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-right: 0%;
+    background-position: 50% 50%;
+    background-repeat: repeat repeat;
 }
+
+#chatBox {
+    float: left;
+    height: auto;
+    margin-left: 15.349351%;
+    margin-top: 50px;
+    clear: none;
+    width: 60%;
+}
+
+#chatText {
+    float: left;
+    font-size: 100%;
+    width: auto;
+    height: auto;
+    text-align: left;
+    font-weight: 200;
+    line-height: 1em;
+    margin-left: 8%;
+    margin-top: 5%;
+    clear: none;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px rgb(155,155,155);
+}
+
+#chatText1 {
+    float: left;
+    font-size: 100%;
+    width: auto;
+    height: auto;
+    text-align: left;
+    font-weight: normal;
+    line-height: 1em;
+    margin-left: 8%;
+    margin-top: 5%;
+    clear: both;
+    min-height: 0px;
+    color: rgb(255, 255, 255);
+    margin-right: 0%;
+    text-shadow: 2px 2px rgb(155,155,155);
+}
+
+#chatBox3 {
+    float: left;
+    height: auto;
+    margin-left: 0.00147406%;
+    margin-top: 70px;
+    clear: none;
+    width: 16.701061%;
+}
+
+
+
+// /*---------------below is message div of the person user is chatting with.---------------*/
+// .friendMsgBar {
+//   position: absolute;
+//   left: 0px;
+//   top: 0px;
+//   width: 870px;
+//   height: 800px;
+//   z-index: 10;
+// }
+// .friendName {
+//   font-size: 10px;
+//   font-family: "Myriad Pro";
+//   color: rgb(255, 255, 255);
+//   line-height: 1.4;
+//   position: absolute;
+//   left: 249.036px;
+//   top: 476.5px;
+//   z-index: 9;
+// }
+// .friendMsg {
+//   font-size: 12px;
+//   font-family: "Myriad Pro";
+//   color: rgb(255, 255, 255);
+//   line-height: 1.167;
+//   text-align: left;
+//   text-shadow: 0.707px 0.707px 0px rgba(0, 0, 0, 0.24);
+//   position: absolute;
+//   left: 249.937px;
+//   top: 507.992px;
+//   width: 340px;
+//   height: 27px;
+//   z-index: 8;
+// }
+// .friendPic {
+//   background-image: url("Layer 2 copy.png");
+//   position: absolute;
+//   left: 611px;
+//   top: 432px;
+//   width: 98px;
+//   height: 98px;
+//   z-index: 7;
+// }
+// .friendProfile {
+//   border-style: solid;
+//   border-width: 1px;
+//   border-color: rgb(0, 0, 0);
+//   border-radius: 50%;
+//   background-color: rgb(255, 255, 255);
+//   box-shadow: 0.5px 0.866px 5px 0px rgba(0, 0, 0, 0.75), inset 0.5px 0.866px 0px 0px rgba(255, 255, 255, 0.01);
+//   position: absolute;
+//   left: 616px;
+//   top: 437px;
+//   width: 86px;
+//   height: 86px;
+//   z-index: 6;
+// }
+// .friendChatBg {
+//   border-style: solid;
+//   border-width: 1px;
+//   border-color: rgb(0, 0, 0);
+//   background-color: rgba(0, 0, 0, 0.69);
+//   box-shadow: 0.5px 0.866px 5px 0px rgba(0, 0, 0, 0.75), inset 0.5px 0.866px 0px 0px rgba(255, 255, 255, 0.01);
+//   position: absolute;
+//   left: 217px;
+//   top: 458px;
+//   width: 485px;
+//   height: 83px;
+//   z-index: 5;
+// }

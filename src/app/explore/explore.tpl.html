@@ -1,10 +1,31 @@
-<div>This is Explore</div>
+<div id="exploreBg">
+    <div id="exploreLeft" class="clearfix">
+        <div class="form-group" style="width: 40%">
+             <label>Search using a tag:</label>
+            <input type="search" ng-model="searchTag" class="form-control"/>
+        </br>
+            <button type="button" ng-click="search()" class="btn btn-primary"/> Search </button>
+        </div>
+        <div class="mentorInfo" ng-show="{{done}}">
+        </div>
+    </div>
 
-<input type="search" ng-model="searchTag" />
-<input type="button" ng-click="search()" value="search"/>
+    <div id="exploreRight" class="clearfix">
+        <!-- <div>{{map}}</div> -->
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+          <ui-gmap-circle ng-repeat='(key, c) in circles track by key'
+            center='c.center' radius='c.radius' fill='c.fill'
+            stroke='c.stroke' clickable='c.clickable' events="c.events">
+          </ui-gmap-circle>
+          <ui-gmap-circle
+            center='range.center' radius='range.radius' fill='range.fill'
+            stroke='range.stroke' clickable='range.clickable'>
+          </ui-gmap-circle>
+        </ui-gmap-google-map>
 
-<div>{{map}}</div>
-
+    </div>
+</div>
+<!--
 <ui-gmap-google-map center='map.center' zoom='map.zoom'>
   <ui-gmap-circle ng-repeat='(key, c) in circles track by key'
     center='c.center' radius='c.radius' fill='c.fill'
@@ -14,4 +35,4 @@
     center='range.center' radius='range.radius' fill='range.fill'
     stroke='range.stroke' clickable='range.clickable'>
   </ui-gmap-circle>
-</ui-gmap-google-map>
+</ui-gmap-google-map> -->

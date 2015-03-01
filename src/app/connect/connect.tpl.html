@@ -1,15 +1,37 @@
-<div>This is Connect</div>
-
-<label>Recipient:</label>
-<input type="text" ng-model="prevView.recipientId" />
-<label>Text:</label>
-<input type="text" ng-model="prevView.textBody" />
-
-<input type="button" ng-click="send()" value="send">
-
-<p ng-repeat="message in messages">
-at:[{{message.timestamp}}] from:[{{message.senderId}}] to:[{{message.recipientId}}] message:{{message.textBody}}
-</p>
+<!-- <p ng-repeat="message in messages">
+at:[] from:[{{message.senderId}}] to:[{{message.recipientId}}] message:
+</p> -->
 
 <!-- <div id="profilePicture" style="background-image:url({{CHANGE TO TOUXIANG}});"> </div> -->
-<div ng-class=""></div>
+<div id="chatContainer" class="chatContainer clearfix" style="backgronud-color: rgb(43, 132, 222);">
+        <div id="chatInfoBox">
+            </br>
+        </br>
+                <label style="color:rgb(124,142,159); margin-left:40%; margin-top: 5%;">Recipient
+                    <input type="text" ng-model="prevView.recipientId" class="chatInfo form-control" placeholder="UID of your mentor/mentee."/>
+                </label>
+            </br>
+                <label style="color:rgb(124,142,159); margin-left:40%;">Text
+                    <input type="text" ng-model="prevView.textBody" class="chatInfo form-control" placeholder="Say hi to your him/her!"/>
+                </label>
+            </br>
+                <button class="btn btn-info" ng-click="send()" style="margin-left:50%; margin-top:10px;">Send</button>
+        </div>
+    <div ng-repeat="message in messages | orderBy: message.timestamp">
+        <div id="chatBox" class="clearfix">
+            <div id="chatBox1" class="clearfix">
+            </div>
+            <div id="chatBox2 chatBox3" class="clearfix">
+                <p id="chatText" style="margin-left:5px;">{{message.textBody}}</p>
+            </div>
+        </div>
+        <div id="chatBox3" class="clearfix">
+            <p id="chatText">
+            Time sent&#x3a;
+            </p>
+            <p id="chatText1">
+                {{message.timestamp}}
+            </p>
+        </div>
+    </div>
+</div>

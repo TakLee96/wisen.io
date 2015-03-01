@@ -76,6 +76,7 @@ module.exports = {
       'bower_components/angular-google-maps/dist/angular-google-maps.min.js'
     ],
     css: [
+        // '/bower_components/angular-ui-router/src/boilerplate.css'
     ],
     assets: [
         'src/assets/logo.gif',
@@ -95,7 +96,9 @@ module.exports = {
         'src/assets/cubes.gif',
         'src/assets/skills.gif',
         'src/assets/community.gif',
-        'src/assets/matchUp.gif'
+        'src/assets/matchUp.gif',
+        'src/assets/chagBg.jpg',
+        'src/assets/defaultProfile.png'
     ]
   },
 };
