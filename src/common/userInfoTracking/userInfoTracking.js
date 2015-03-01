@@ -41,7 +41,7 @@ angular.module("Wisen.userInfoTracking", [
     latitude: 0,
     longitude: 0,
     active: false,
-    recipient: {},
+    recipient: null,
     hasNotInit: function () {
       return !this.initted;
     },

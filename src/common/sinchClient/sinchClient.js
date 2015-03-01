@@ -61,6 +61,18 @@ angular.module("Wisen.sinchClient", [
       });
     },
     registerRecipient: function (recipient) {
+      if (!recipient) {
+        console.log("registering empty recipient!!!");
+        return;
+      }
+      if (!recipient.recipientUID) {
+        console.log("NO recipientUID");
+        return;
+      }
+      if (!recipient.recipientName) {
+        console.log("NO recipientName");
+        return;
+      }
       console.log("Registering Recipient");
       console.log(recipient);
       this.recipientUID = recipient.recipientUID;
