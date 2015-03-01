@@ -1,7 +1,8 @@
 angular.module( 'Wisen.connect', [
   'ui.router',
   'Wisen.sinchClient',
-  'Wisen.firebaseTwitterLogin'
+  'Wisen.firebaseTwitterLogin',
+  'ui.bootstrap'
 ])
 
 /**
