@@ -17,10 +17,8 @@
 
     <div ng-repeat="message in messages | orderBy: message.timestamp"
         id="chatBox" class="clearfix">
-            <div id="chatBox1" class="clearfix">
+            <div id="chatBox1 chatBox2" class="clearfix">
                 <img ng-src="{{message.imageURL}}"/>
-            </div>
-            <div id="chatBox2" class="clearfix">
                 <p id="chatText">{{message.textBody}}</p>
             </div>
         </div>
