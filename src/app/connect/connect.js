@@ -33,18 +33,18 @@ angular.module( 'Wisen.connect', [
   $scope.ready = false;
 
   $scope.imageURL = {
-    sender: "null",
-    receiver: "null"
+    sender: "",
+    receiver: ""
   };
 
   $scope.name = {
-    sender: "null",
-    receiver: "null"
+    sender: "",
+    receiver: ""
   };
 
   $scope.sinchUsername = {
-    sender: "null",
-    receiver: "null"
+    sender: "",
+    receiver: ""
   };
 
   var resolve = function () {
