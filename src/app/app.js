@@ -17,10 +17,13 @@ angular.module( 'Wisen', [
 
 .controller( 'AppCtrl', function ($scope, $location, $login, $state, $sinch) {
 
-  $scope.$on('$stateChangeSuccess', function(event, toState, toParams){
+  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState) {
       $scope.pageTitle = toState.data.pageTitle + ' | Wisen';
       if ($login.getUid() === null) {
-        $state.go("welcome");
+          if (fromState.name === "welcome" && toState.name !== "welcome"){
+              alert("This page is unavailable to you right now. Please log in using Twitter first!");
+          }
+          $state.go("welcome");
       } else if (toState.name === "connect") {
         $sinch.registerRecipient(toParams);
       }
@@ -29,4 +32,3 @@ angular.module( 'Wisen', [
 })
 
 ;
-

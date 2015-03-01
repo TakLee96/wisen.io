@@ -1,12 +1,12 @@
-<div>This is Connect</div>
+<!-- <div>This is Connect</div>
 
 <input type="text" ng-model="text" />
 
-<input type="button" ng-click="send()" value="send">
-
+<input type="button" ng-click="send()" value="send"> -->
+<!-- 
 <p ng-repeat="message in messages">
 at:[{{message.timestamp}}] from:[{{message.senderId}}] to:[{{message.recipientId}}] message:{{message.textBody}}
-</p>
+</p> -->
 
 <!-- <div id="profilePicture" style="background-image:url({{CHANGE TO TOUXIANG}});"> </div> -->
 <div id="chatContainer" class="chatContainer clearfix" style="backgronud-color: rgb(43, 132, 222);">
@@ -23,7 +23,8 @@ at:[{{message.timestamp}}] from:[{{message.senderId}}] to:[{{message.recipientId
             </br>
                 <button class="btn btn-info" ng-click="send()" style="margin-left:50%; margin-top:10px;">Send</button>
         </div>
-    <div ng-repeat="message in messages | orderBy: message.timestamp">
+
+        <div class="anchor" ng-repeat="message in messages | orderBy: message.timestamp">
         <div id="chatBox" class="clearfix">
             <div id="chatBox1" class="clearfix">
             </div>
@@ -40,4 +41,5 @@ at:[{{message.timestamp}}] from:[{{message.senderId}}] to:[{{message.recipientId
             </p>
         </div>
     </div>
+
 </div>
