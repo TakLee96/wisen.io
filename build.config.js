@@ -78,8 +78,19 @@ module.exports = {
     css: [
     ],
     assets: [
-        'src/assets/run.jpg',
         'src/assets/logo.gif',
+        'src/assets/wisenLogo1.gif',
+        'src/assets/wisenLogoHorizontal.gif',
+        'src/assets/wisenLogoSingle.gif',
+        'src/assets/wisenLogoSplash.gif',
+        'src/assets/wisenLogoVerticle.gif',
+        'src/assets/swim.jpg',
+        'src/assets/run.jpg',
+        'src/assets/origami.jpg',
+        'src/assets/biking.jpg',
+        'src/assets/skateboard.jpg',
+        'src/assets/cook.jpg',
+        'src/assets/cubes.gif'
     ]
   },
 };
