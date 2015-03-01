@@ -2,15 +2,15 @@
     <div id="chatInfoBox">
         </br>
         </br>
-        <label style="color:rgb(124,142,159); margin-left:40%; margin-top: 5%;">Recipient
-            <input type="text" ng-model="sinchUsername.receiver" class="chatInfo form-control" placeholder="UID of your mentor/mentee."/>
-        </label>
-        </br>
-        <label style="color:rgb(124,142,159); margin-left:40%;">Text
-            <input type="text" ng-model="text" class="chatInfo form-control" placeholder="Say hi to your him/her!"/>
-        </label>
-        </br>
-        <button class="btn btn-info" ng-click="send()" style="margin-left:50%; margin-top:10px;">Send</button>
+        <form>
+            <label style="color:rgb(124,142,159); margin-left:40%; margin-top: 5%;">Recipient </label>
+                <input type="text" ng-model="sinchUsername.receiver" class="form-control" placeholder="UID of your mentor/mentee."/>
+            </br>
+            <label style="color:rgb(124,142,159); margin-left:40%;">Text </label>
+                <input type="text" ng-model="text" class="form-control" placeholder="Say hi to your him/her!"/>
+            </br>
+            <button class="btn btn-info" ng-click="send()" style="margin-left:50%; margin-top:10px;">Send</button>
+        </form>
     </div>
 
     <div ng-repeat="message in messages | orderBy: message.timestamp">
