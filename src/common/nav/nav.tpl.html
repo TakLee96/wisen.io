@@ -1,7 +1,12 @@
 <div id="nav" class="clearfix">
     <div id="box" class="clearfix">
+      <a href ui-sref="welcome">Welcome</a>
+      <a href ui-sref="explore">Explore</a>
+      <a href ui-sref="connect">Connect</a>
+      <a href ui-sref="settings">Settings</a>
     </div>
     <p id="text">
-    Welcome, <span ng-bind="name"></span>&#x21;
+      Welcome, <span ng-bind="name"></span>&#x21;
     </p>
+    <input type="button" value="Logout" ng-click="logout()" />
 </div>
