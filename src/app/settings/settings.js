@@ -41,27 +41,6 @@ angular.module( 'Wisen.settings', [
     $scope.locationAlert.msg = "retrieving is slow...";
   }, 5000);
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      clearTimeout(id);
-      $scope.locationAlert.type = "info";
-      $scope.locationAlert.msg = "location found";
-      $scope.$digest();
-      $geo.$set($login.getUid(), [
-        position.coords.latitude, 
-        position.coords.longitude
-      ]).then(function () {
-        $scope.locationAlert.type = "success";
-        $scope.locationAlert.msg = "location stored";
-        $scope.$digest();
-      }, function (error) {
-        $scope.locationAlert.type = "danger";
-        $scope.locationAlert.msg = error;
-        $scope.$digest();
-      });
-    });
-  }
-
   $scope.name = $login.getName();
 
   userObj.on("value", function (user) {
@@ -90,7 +69,7 @@ angular.module( 'Wisen.settings', [
       tag = $scope.newTags[i];
       if (tag !== "") {
         var obj = {};
-        obj[tag] = true;
+        obj[tag.toLowerCase()] = true;
         userObj.child("tags").update(obj);
       }
     }

@@ -8,7 +8,7 @@
 <ui-gmap-google-map center='map.center' zoom='map.zoom'>
   <ui-gmap-circle ng-repeat='(key, c) in circles track by key'
     center='c.center' radius='c.radius' fill='c.fill'
-    stroke='c.stroke' clickable='c.clickable' events="c.events">
+    stroke='c.stroke' clickable='c.clickable' draggable="c.draggable">
   </ui-gmap-circle>
   <ui-gmap-circle
     center='range.center' radius='range.radius' fill='range.fill'

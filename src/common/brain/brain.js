@@ -4,20 +4,30 @@ angular.module("Wisen.brain", [
 
 .factory("$brain", function ($login) {
 
-  var ref = $login.getDefaultRef();
+  var ref = $login.getRef();
 
   var serviceInstance = {
     figureOutBestMentorByTag: function (tag, locations, cb) {
       var list = this.__sort__(locations);
-      setTimeout(function () {
-        for (var k = 0; k < list.length; k++) {
-          $login.getDefaultRef().child(list[k].key).child("tags").off("child_added");
+
+      var next = function (i) {
+        if (i === list.length) {
+          cb(null);
+          return;
         }
-        cb(null);
-      }, 10000);
-      for (var i = 0; i < list.length; i++) {
-        this.__iter__(list, list[i], tag, cb);
-      }
+        var uid = list[i].key;
+        console.log(uid);
+        ref.child("users").child(uid).child("tags").child(tag.toLowerCase()).once("value", function (snap) {
+          console.log("uid[%s] tags[%s] snap[%s]", uid, tag, snap.val());
+          if (snap.val() !== null && snap.val()) {
+            cb(uid);
+          } else {
+            next(i+1);
+          }
+        });
+      };
+
+      next(0);
     },
     figureOutBestMentorByLocation: function (locations) {
       var list = this.__sort__(locations);
@@ -32,17 +42,6 @@ angular.module("Wisen.brain", [
         return loc1.distance - loc2.distance;
       }); 
       return list;
-    },
-    __iter__: function (list, location, tag, cb) {
-      var tagRef = $login.getDefaultRef().child(location.key).child("tags");
-      tagRef.on("child_added", function (tagObj) {
-        if (tagObj.val() === tag) {
-          for (var j = 0; j < list.length; j++) {
-            $login.getDefaultRef().child(list[j].key).child("tags").off("child_added");
-          }
-          cb(location);
-        }
-      });
     }
   };
 

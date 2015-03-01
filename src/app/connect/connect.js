@@ -24,13 +24,29 @@ angular.module( 'Wisen.connect', [
 .controller( 'ConnectCtrl', function ($scope, $sinch, $login) {
 
   $scope.messages = [];
-  $scope.prevView = {
-    senderId: $login.getSinchUsername(),
-    recipientId: "",
-    textBody: ""
+  $scope.text = "";
+  $scope.sendReceiverResolved = false;
+
+  $scope.imageURL = {
+    sender: null,
+    receiver: null
   };
 
-  console.log($scope.messages);
+  $scope.name = {
+    sender: null,
+    receiver: null
+  };
+
+  $sinch.getImageURL(function (url) {
+    $scope.imageURL.receiver = url;
+    $scope.name.receiver = $sinch.getName();
+    $login.getImageURL(function (img) {
+      $scope.imageURL.sender = img;
+      $scope.name.sender = $login.getName();
+      $scope.sendReceiverResolved = true;
+      $scope.$digest();
+    });
+  });
 
   $sinch.startClient(function () {
     global_username = $login.getSinchUsername();
@@ -39,7 +55,7 @@ angular.module( 'Wisen.connect', [
   });
 
   $scope.send = function () {
-    $sinch.sendMessage($scope.prevView.recipientId, $scope.prevView.textBody, function (error) {
+    $sinch.sendMessage($scope.text, function (error) {
       console.log(error);
     });
   };
@@ -54,12 +70,13 @@ angular.module( 'Wisen.connect', [
       senderId: receivedInfo.senderId,
       recipientId: receivedInfo.recipientIds[1],
       textBody: receivedInfo.textBody,
-      timestamp: receivedInfo.timestamp
+      timestamp: receivedInfo.timestamp,
+      imageURL: (receivedInfo.direction) ? $scope.imageURL.sender : $scope.imageURL.receiver
     };
     console.log(receivedInfo);
     $scope.messages.push(message);
     if (receivedInfo.direction) {
-      $scope.prevView.textBody = "";
+      $scope.text = "";
     }
     $scope.$digest();
   });
